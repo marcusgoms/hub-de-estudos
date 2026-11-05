@@ -1,0 +1,1367 @@
+/* ================================================================
+   ESTUDO — página de apostila
+   Estilo editorial: 2 colunas no desktop, 1 no mobile
+   Cada capítulo com cor própria, cada tópico com subcor
+================================================================ */
+
+/* -------- CORES POR CAPÍTULO -------- */
+
+/* Cores dos capítulos — tema claro */
+.capitulo--i {
+  --cap-forte: #b85c38;
+  --cap-escuro: #8a3b1f;
+  --cap-claro: #e0c5b4;
+  --cap-fundo: #f9f1ea;
+}
+.capitulo--ii {
+  --cap-forte: #4a5255;
+  --cap-escuro: #2d3337;
+  --cap-claro: #c7cdd0;
+  --cap-fundo: #eff2f3;
+}
+.capitulo--iii {
+  --cap-forte: #b08a3e;
+  --cap-escuro: #7f6320;
+  --cap-claro: #e5d5a8;
+  --cap-fundo: #f9f4e7;
+}
+.capitulo--iv {
+  --cap-forte: #5f6b3d;
+  --cap-escuro: #3c4723;
+  --cap-claro: #c7cfab;
+  --cap-fundo: #f1f3eb;
+}
+.capitulo--v {
+  --cap-forte: #8a3b1f;
+  --cap-escuro: #5c2410;
+  --cap-claro: #d7b3a1;
+  --cap-fundo: #f6ece6;
+}
+
+/* Cores dos capítulos — tema escuro */
+:root[data-theme="dark"] .capitulo--i {
+  --cap-forte: #d87a56;
+  --cap-escuro: #e89670;
+  --cap-claro: #e0c5b4;
+  --cap-fundo: #241915;
+}
+:root[data-theme="dark"] .capitulo--ii {
+  --cap-forte: #a8b4b8;
+  --cap-escuro: #c7cdd0;
+  --cap-claro: #c7cdd0;
+  --cap-fundo: #1b1f21;
+}
+:root[data-theme="dark"] .capitulo--iii {
+  --cap-forte: #d4b075;
+  --cap-escuro: #e5c891;
+  --cap-claro: #e5d5a8;
+  --cap-fundo: #241f14;
+}
+:root[data-theme="dark"] .capitulo--iv {
+  --cap-forte: #9fab78;
+  --cap-escuro: #b8c395;
+  --cap-claro: #c7cfab;
+  --cap-fundo: #1c1f16;
+}
+:root[data-theme="dark"] .capitulo--v {
+  --cap-forte: #c47555;
+  --cap-escuro: #d99370;
+  --cap-claro: #d7b3a1;
+  --cap-fundo: #241613;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .capitulo--i {
+    --cap-forte: #d87a56; --cap-escuro: #e89670; --cap-claro: #e0c5b4; --cap-fundo: #241915;
+  }
+  :root:not([data-theme="light"]) .capitulo--ii {
+    --cap-forte: #a8b4b8; --cap-escuro: #c7cdd0; --cap-claro: #c7cdd0; --cap-fundo: #1b1f21;
+  }
+  :root:not([data-theme="light"]) .capitulo--iii {
+    --cap-forte: #d4b075; --cap-escuro: #e5c891; --cap-claro: #e5d5a8; --cap-fundo: #241f14;
+  }
+  :root:not([data-theme="light"]) .capitulo--iv {
+    --cap-forte: #9fab78; --cap-escuro: #b8c395; --cap-claro: #c7cfab; --cap-fundo: #1c1f16;
+  }
+  :root:not([data-theme="light"]) .capitulo--v {
+    --cap-forte: #c47555; --cap-escuro: #d99370; --cap-claro: #d7b3a1; --cap-fundo: #241613;
+  }
+}
+
+/* Tópicos ganham subcor variando o tom do capítulo */
+.topico--a { --top-marca: var(--cap-forte); }
+.topico--b { --top-marca: var(--cap-escuro); }
+.topico--c { --top-marca: var(--cap-forte); filter: none; }
+
+/* -------- CAPA DO ESTUDO -------- */
+
+.estudo-capa {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  overflow: hidden;
+  padding: 3rem 1.5rem 5rem;
+  background: var(--preto);
+}
+
+.estudo-capa-fundo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 40%;
+  filter: brightness(0.7) contrast(1.05) saturate(1.1);
+  z-index: 0;
+}
+
+.estudo-capa-gradiente {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.3) 0%,
+    rgba(0,0,0,0.05) 25%,
+    rgba(0,0,0,0.4) 65%,
+    rgba(0,0,0,0.85) 100%);
+  z-index: 1;
+}
+
+.estudo-capa-conteudo {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.estudo-capa-selo {
+  font-family: var(--fonte-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.estudo-capa h1 {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.92;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+}
+
+.estudo-capa-sub {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  line-height: 1.5;
+  max-width: 650px;
+  color: rgba(255,255,255,0.85);
+  margin: 0 0 2rem;
+}
+
+.estudo-capa-linha {
+  width: 60px;
+  height: 2px;
+  background: var(--dourado);
+  margin-bottom: 1.5rem;
+}
+
+.estudo-capa-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  font-family: var(--fonte-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+/* -------- LAYOUT PRINCIPAL -------- */
+
+.estudo-layout {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 0;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 190px;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* -------- NAVEGAÇÃO LATERAL -------- */
+
+.estudo-nav {
+  position: sticky;
+  top: 90px;
+  font-family: var(--fonte-sans);
+  font-size: 0.85rem;
+}
+
+.estudo-nav-titulo {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+.nav-capitulos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: cap;
+}
+
+.nav-capitulos > li {
+  counter-increment: cap;
+  margin-bottom: 0.15rem;
+}
+
+.nav-cap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.5rem 0.8rem;
+  color: var(--cinza);
+  font-weight: 500;
+  line-height: 1.3;
+  transition: color var(--tr-rapida), border-color var(--tr-rapida);
+  border-left: 2px solid transparent;
+  margin-left: -0.8rem;
+}
+
+.nav-cap::before {
+  content: counter(cap, upper-roman);
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  color: var(--cinza-claro);
+  letter-spacing: 0.1em;
+  min-width: 1.6rem;
+  font-weight: 400;
+}
+
+.nav-cap:hover { color: var(--preto); }
+
+/* Sublista de tópicos — aparece só quando o capítulo é o atual */
+.nav-topicos {
+  list-style: none;
+  padding: 0 0 0.3rem 2.1rem;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 300ms ease, opacity 200ms ease;
+}
+
+.nav-capitulos > li.ativo .nav-topicos,
+.nav-capitulos > li.aberto .nav-topicos {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.nav-topicos a {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.78rem;
+  color: var(--cinza);
+  line-height: 1.3;
+  border-left: 2px solid transparent;
+  margin-left: -0.5rem;
+  transition: color var(--tr-rapida), border-color var(--tr-rapida);
+}
+
+.nav-topicos a:hover { color: var(--preto); }
+.nav-topicos a.ativo { color: var(--preto); border-left-color: var(--cap-marca, var(--terracota)); }
+
+/* Cor do ativo: define --cap-marca por item para aplicar em cap + tópicos */
+.nav-capitulos > li[data-cap="cap-1"] { --cap-marca: #b85c38; }
+.nav-capitulos > li[data-cap="cap-2"] { --cap-marca: #4a5255; }
+.nav-capitulos > li[data-cap="cap-3"] { --cap-marca: #b08a3e; }
+.nav-capitulos > li[data-cap="cap-4"] { --cap-marca: #5f6b3d; }
+.nav-capitulos > li[data-cap="cap-5"] { --cap-marca: #8a3b1f; }
+
+:root[data-theme="dark"] .nav-capitulos > li[data-cap="cap-1"] { --cap-marca: #d87a56; }
+:root[data-theme="dark"] .nav-capitulos > li[data-cap="cap-2"] { --cap-marca: #a8b4b8; }
+:root[data-theme="dark"] .nav-capitulos > li[data-cap="cap-3"] { --cap-marca: #d4b075; }
+:root[data-theme="dark"] .nav-capitulos > li[data-cap="cap-4"] { --cap-marca: #9fab78; }
+:root[data-theme="dark"] .nav-capitulos > li[data-cap="cap-5"] { --cap-marca: #c47555; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .nav-capitulos > li[data-cap="cap-1"] { --cap-marca: #d87a56; }
+  :root:not([data-theme="light"]) .nav-capitulos > li[data-cap="cap-2"] { --cap-marca: #a8b4b8; }
+  :root:not([data-theme="light"]) .nav-capitulos > li[data-cap="cap-3"] { --cap-marca: #d4b075; }
+  :root:not([data-theme="light"]) .nav-capitulos > li[data-cap="cap-4"] { --cap-marca: #9fab78; }
+  :root:not([data-theme="light"]) .nav-capitulos > li[data-cap="cap-5"] { --cap-marca: #c47555; }
+}
+
+.nav-capitulos > li.ativo .nav-cap {
+  color: var(--cap-marca);
+  border-left-color: var(--cap-marca);
+}
+
+.nav-capitulos > li.ativo .nav-cap::before { color: var(--cap-marca); }
+
+/* -------- NAVEGAÇÃO LATERAL DIREITA — apostilas -------- */
+
+.estudo-nav-apostilas {
+  position: sticky;
+  top: 90px;
+  font-family: var(--fonte-sans);
+  font-size: 0.85rem;
+}
+
+.nav-apostilas {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.nav-apostila {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--borda);
+  line-height: 1.3;
+}
+
+.nav-apostila:first-child { padding-top: 0; }
+.nav-apostila:last-child { border-bottom: none; }
+
+.nav-apostila-num {
+  display: block;
+  font-family: var(--fonte-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--cinza-claro);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+.nav-apostila a {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+  color: var(--cinza-escuro);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color var(--tr-rapida);
+}
+
+.nav-apostila a:hover { color: var(--terracota); }
+
+.nav-apostila.atual a { color: var(--terracota); }
+
+.nav-apostila-tema {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--cinza);
+  margin-top: 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.nav-apostila-titulo-prev {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--cinza-claro);
+}
+
+.nav-apostilas-ver {
+  display: inline-block;
+  font-family: var(--fonte-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  font-weight: 600;
+  transition: color var(--tr-rapida);
+}
+
+.nav-apostilas-ver:hover { color: var(--terracota); }
+
+/* -------- CORPO DO ESTUDO -------- */
+
+.estudo-corpo {
+  min-width: 0;
+}
+
+/* Capítulo */
+
+.capitulo {
+  margin-bottom: calc(var(--respiro-secao) / 2);
+  padding: 3rem 2.5rem 4rem;
+  background: var(--cap-fundo);
+  scroll-margin-top: 80px;
+  position: relative;
+  border-radius: 2px;
+}
+
+.capitulo:first-child {
+  padding-top: 2rem;
+}
+
+/* Variação de abertura: hero com imagem + título por cima */
+.capitulo-abertura-hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  padding: 3rem;
+  margin: -3rem -2.5rem 3rem;
+  overflow: hidden;
+  background: var(--preto);
+}
+.capitulo-abertura-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+  z-index: 0;
+}
+.capitulo-abertura-hero .hero-conteudo {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+.capitulo-abertura-hero .capitulo-numero { color: var(--cap-claro); }
+.capitulo-abertura-hero .capitulo-titulo { color: white; }
+.capitulo-abertura-hero .capitulo-resumo { color: rgba(255,255,255,0.88); }
+
+/* Variação de abertura: lado a lado */
+.capitulo-abertura-lado {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  align-items: center;
+}
+.capitulo-abertura-lado figure {
+  margin: 0;
+}
+.capitulo-abertura-lado img {
+  width: 100%;
+  display: block;
+}
+
+/* Variação de abertura: centralizado minimalista (padrão) */
+.capitulo-cabeca {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--cap-forte);
+}
+
+.capitulo-numero {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--cap-forte);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.capitulo-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.0;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem;
+  color: var(--preto);
+}
+
+.capitulo-resumo {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--cinza-escuro);
+  margin: 0;
+  max-width: 600px;
+}
+
+/* Tópico (seção dentro do capítulo) */
+
+.topico {
+  margin-bottom: 4rem;
+  padding-top: 2rem;
+  border-top: 1px dashed var(--cap-claro);
+}
+
+.topico:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.topico-numero {
+  font-family: var(--fonte-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cap-escuro);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.topico-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.9rem;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.5rem;
+  color: var(--preto);
+}
+
+/* Colunas duplas */
+
+.texto-colunas {
+  column-count: 2;
+  column-gap: 2.5rem;
+  column-fill: balance;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  orphans: 3;
+  widows: 3;
+  margin-top: 2rem;
+}
+
+.texto-colunas:first-child {
+  margin-top: 0;
+}
+
+.texto-colunas p {
+  margin: 0 0 var(--respiro-paragrafo);
+}
+
+.texto-colunas p:first-of-type::first-letter {
+  font-family: var(--fonte-titulo);
+  font-size: 3rem;
+  line-height: 1;
+  float: left;
+  padding: 0 0.4rem 0 0;
+  margin-top: -0.12em;
+  font-weight: 700;
+  color: var(--cap-forte);
+}
+
+.texto-colunas.sem-dropcap p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+.texto-unico {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  text-align: justify;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
+.texto-unico p {
+  margin: 0 0 var(--respiro-paragrafo);
+}
+
+/* Texto curto que ocupa a largura toda (sem virar 2 colunas isoladas) */
+.texto-cheio {
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  max-width: 100%;
+}
+
+.texto-cheio p {
+  margin: 0 0 var(--respiro-paragrafo);
+}
+
+.texto-cheio p:first-of-type::first-letter {
+  font-family: var(--fonte-titulo);
+  font-size: 3rem;
+  line-height: 1;
+  float: left;
+  padding: 0 0.4rem 0 0;
+  margin-top: -0.12em;
+  font-weight: 700;
+  color: var(--cap-forte);
+}
+
+.texto-cheio.sem-dropcap p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* Bloco com imagens flutuantes em uma coluna larga */
+.texto-flutuante {
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  margin-top: 2rem;
+}
+
+.texto-flutuante:first-child {
+  margin-top: 0;
+}
+
+.texto-flutuante::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.texto-flutuante p {
+  margin: 0 0 var(--respiro-paragrafo);
+}
+
+.texto-flutuante p:first-of-type::first-letter {
+  font-family: var(--fonte-titulo);
+  font-size: 3rem;
+  line-height: 1;
+  float: left;
+  padding: 0 0.4rem 0 0;
+  margin-top: -0.12em;
+  font-weight: 700;
+  color: var(--cap-forte);
+}
+
+.texto-flutuante.sem-dropcap p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* Subtítulo dentro do tópico */
+
+.subtitulo {
+  font-family: var(--fonte-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--cap-forte);
+  /* padding em vez de margin: margin colapsa em multi-column */
+  padding-top: 2rem;
+  margin: 0 0 0.8rem;
+  break-after: avoid-column;
+}
+
+/* Subtítulo COMO PRIMEIRO item do bloco de 2 colunas vira cabeçalho
+   atravessando as duas colunas (senão desalinha os topos). */
+.texto-colunas > .subtitulo:first-child {
+  column-span: all;
+  -webkit-column-span: all;
+  padding-top: 0;
+}
+
+/* Subtítulo como primeiro filho de um bloco-grid, ou subtítulo imediatamente
+   após uma figura-float no texto-flutuante: zera padding-top para alinhar
+   com o topo da imagem ao lado. */
+.bloco-grid > div > .subtitulo:first-child,
+.texto-flutuante > .figura-float-esquerda + .subtitulo,
+.texto-flutuante > .figura-float-direita + .subtitulo {
+  padding-top: 0;
+}
+
+/* -------- IMAGENS -------- */
+
+.figura {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.figura-largura-plena {
+  margin: 3rem -1rem;
+  break-inside: avoid-column;
+}
+
+/* Floats para imagem ao lado do texto */
+
+.figura-float-esquerda,
+.figura-float-direita {
+  margin: 0 0 1.5rem;
+  width: 42%;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+}
+
+.figura-float-esquerda {
+  float: left;
+  margin-right: 2rem;
+  shape-outside: margin-box;
+}
+
+.figura-float-direita {
+  float: right;
+  margin-left: 2rem;
+  shape-outside: margin-box;
+}
+
+.figura-pequena {
+  width: 32%;
+  max-width: 280px;
+}
+
+/* Figura dentro de texto-colunas que atravessa as duas colunas
+   e serve de "ancora" para o texto fluir em volta. */
+.figura-float-coluna {
+  float: left;
+  width: 50%;
+  margin: 0.3rem 1.8rem 1rem 0;
+  break-inside: avoid;
+  shape-outside: margin-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.figura-float-coluna img {
+  width: 100%;
+  display: block;
+}
+
+/* Subtítulo solto (fora de texto-colunas): mesmo espaço em cima */
+.subtitulo-solto {
+  padding-top: 2rem;
+  margin: 0 0 0.8rem;
+}
+
+/* Figura float reduzida: a imagem ocupa ~45% da coluna de leitura, o texto corre ao lado e depois embaixo. */
+.figura-float-pequena {
+  width: 45%;
+  max-width: 320px;
+}
+
+/* Grid de layout: imagem (com legenda) de um lado, texto do outro */
+
+.bloco-grid {
+  display: grid;
+  gap: 2.5rem;
+  margin: 2.5rem 0;
+  align-items: stretch;
+  break-inside: avoid;
+  column-span: all;
+  -webkit-column-span: all;
+}
+
+.bloco-grid-2 { grid-template-columns: 1fr 1fr; }
+.bloco-grid-imagem-texto { grid-template-columns: 5fr 7fr; }
+.bloco-grid-texto-imagem { grid-template-columns: 7fr 5fr; }
+
+.bloco-grid > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.bloco-grid figure {
+  margin: 0;
+  justify-content: flex-start;
+}
+
+.bloco-grid figure img {
+  width: 100%;
+  display: block;
+  flex-grow: 1;
+  object-fit: cover;
+  max-height: 480px;
+}
+
+.bloco-grid p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
+.bloco-grid p:last-child { margin-bottom: 0; }
+
+.bloco-grid > div p:first-of-type::first-letter {
+  font-family: var(--fonte-titulo);
+  font-size: 3rem;
+  line-height: 1;
+  float: left;
+  padding: 0 0.4rem 0 0;
+  margin-top: -0.12em;
+  font-weight: 700;
+  color: var(--cap-forte);
+}
+
+.bloco-grid .nao-dropcap p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* Linha com duas imagens lado a lado */
+.par-imagens {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+  break-inside: avoid;
+  column-span: all;
+  -webkit-column-span: all;
+}
+
+.par-imagens figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Trio */
+.trio-imagens {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+  break-inside: avoid;
+  column-span: all;
+  -webkit-column-span: all;
+}
+
+/* Imagens padrão */
+
+.figura > img,
+.figura-float-esquerda > img,
+.figura-float-direita > img,
+.figura-pequena > img,
+.par-imagens figure > img,
+.trio-imagens figure > img {
+  width: 100%;
+  display: block;
+}
+
+.figura-largura-plena > img {
+  width: 100%;
+  display: block;
+}
+
+.figura-legenda {
+  font-family: var(--fonte-sans);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--cinza);
+  margin-top: 0.7rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--cap-forte);
+}
+
+.figura-legenda strong {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--preto);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* -------- CAIXAS DE DESTAQUE -------- */
+
+.caixa {
+  background: var(--superficie);
+  border-left: 4px solid var(--cap-forte);
+  padding: 1.5rem 1.5rem 1.5rem 1.8rem;
+  margin: 2rem 0;
+  break-inside: avoid-column;
+  font-family: var(--fonte-sans);
+  clear: both;  /* nunca sobrepor floats */
+}
+
+.caixa-titulo {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cap-forte);
+  margin-bottom: 0.8rem;
+}
+
+.caixa p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 0.8rem;
+  text-align: left;
+}
+
+.caixa p:last-child { margin-bottom: 0; }
+
+.caixa p::first-letter {
+  float: none;
+  font-size: inherit;
+  color: inherit;
+  padding: 0;
+  font-weight: inherit;
+  font-family: inherit;
+}
+
+/* Dado em destaque */
+
+.dado {
+  background: #1a1a1a;
+  color: #f0ebe1;
+  padding: 2rem;
+  margin: 2.5rem 0;
+  display: flex;
+  gap: 2rem;
+  align-items: center;  /* numero alinhado ao centro vertical */
+  column-span: all;
+  -webkit-column-span: all;
+  break-inside: avoid-column;
+  clear: both;
+}
+
+.dado-numero {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--cap-claro);
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.dado-texto {
+  font-family: var(--fonte-sans);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(240,235,225,0.88);
+}
+
+.dado-texto strong {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cap-claro);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+/* Citação em destaque — bloco com fundo próprio */
+
+.citacao {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: var(--preto);
+  background: color-mix(in srgb, var(--cap-fundo) 95%, black);
+  padding: 2.5rem 3rem;
+  border-left: 5px solid var(--cap-forte);
+  margin: 3rem 0;
+  column-span: all;
+  -webkit-column-span: all;
+  break-inside: avoid-column;
+  text-align: left;
+  clear: both;
+}
+
+.citacao-autor {
+  display: block;
+  font-family: var(--fonte-sans);
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--cap-forte);
+  margin-top: 1.5rem;
+}
+
+/* -------- ANIMAÇÕES NO SCROLL -------- */
+
+.anima {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+}
+
+.anima.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anima {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* -------- FINAL DO ESTUDO -------- */
+
+.estudo-fim {
+  text-align: center;
+  padding: 4rem 0;
+  border-top: 1px solid var(--borda);
+  margin-top: 4rem;
+}
+
+.estudo-fim-frase {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: var(--cinza-escuro);
+}
+
+.estudo-fim-selo {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--terracota);
+}
+
+.creditos-imagens {
+  scroll-margin-top: 90px;
+  padding: 2rem 0 3rem;
+  border-top: 1px solid var(--borda);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--cinza);
+  overflow-wrap: anywhere;
+}
+
+.creditos-imagens h2 {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  margin: 0 0 0.75rem;
+}
+
+.creditos-imagens p {
+  font-size: inherit;
+  margin: 0 0 0.75rem;
+}
+
+.creditos-imagens ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.creditos-imagens a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* -------- BOTÃO FLUTUANTE DE CAPÍTULOS (tablet + mobile) -------- */
+
+.nav-fab {
+  display: none;
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1.2rem;
+  z-index: 70;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--borda);
+  background: color-mix(in srgb, var(--papel) 92%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--preto);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  align-items: center;
+  justify-content: center;
+  transition: background 200ms ease, box-shadow 200ms ease;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.nav-fab:hover {
+  background: var(--superficie);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+}
+
+.nav-fab svg { display: block; }
+
+/* Painel flutuante de capítulos */
+.nav-painel-fundo {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(0,0,0,0.5);
+}
+
+.nav-painel-fundo.aberto { display: block; }
+
+.nav-painel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 81;
+  max-height: 75vh;
+  overflow-y: auto;
+  background: var(--papel);
+  border-top: 1px solid var(--borda);
+  border-radius: 16px 16px 0 0;
+  padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  transform: translateY(100%);
+  transition: transform 300ms ease;
+  font-family: var(--fonte-sans);
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.2);
+}
+
+.nav-painel.aberto { transform: translateY(0); }
+
+.nav-painel-barra {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--borda);
+  margin: 0 auto 1rem;
+}
+
+.nav-painel-titulo {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-painel-fechar {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  color: var(--cinza);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 150ms ease;
+}
+
+.nav-painel-fechar:hover { background: var(--creme); }
+
+.nav-painel .nav-capitulos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.nav-painel .nav-capitulos > li { margin: 0; }
+
+.nav-painel .nav-cap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--cinza-escuro);
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  border-left: 3px solid transparent;
+  border-radius: 4px;
+  transition: background 150ms ease;
+}
+
+.nav-painel .nav-cap:hover { background: var(--creme); }
+
+.nav-painel .nav-capitulos > li.ativo .nav-cap {
+  color: var(--cap-marca);
+  border-left-color: var(--cap-marca);
+  background: var(--creme);
+}
+
+.nav-painel .nav-topicos {
+  list-style: none;
+  padding: 0 0 0.5rem 2.3rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.nav-painel .nav-topicos a {
+  display: block;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.82rem;
+  color: var(--cinza);
+  line-height: 1.3;
+  border-radius: 4px;
+  transition: background 150ms ease;
+}
+
+.nav-painel .nav-topicos a:hover { background: var(--creme); }
+.nav-painel .nav-topicos a.ativo { color: var(--cap-marca, var(--terracota)); font-weight: 600; }
+
+/* Tema botão no painel */
+.nav-painel .tema-botao {
+  margin: 1rem auto 0;
+  border-top: 1px solid var(--borda);
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  width: auto;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--cinza);
+}
+
+/* -------- RESPONSIVO -------- */
+
+@media (max-width: 1080px) {
+  .capitulo-abertura-lado {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .bloco-grid-imagem-texto,
+  .bloco-grid-texto-imagem,
+  .bloco-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Tablet + mobile: sidebar vira painel flutuante */
+@media (max-width: 1080px) {
+  .estudo-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3rem 2rem 0;
+  }
+
+  .estudo-nav { display: none; }
+  .estudo-nav-apostilas { display: none; }
+  .nav-fab { display: flex; }
+}
+
+@media (max-width: 720px) {
+  .estudo-capa { min-height: 75vh; padding: 2rem 1.2rem 3rem; }
+
+  .estudo-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 2rem 1rem 0;
+  }
+
+  .capitulo {
+    padding: 2rem 1.2rem 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .capitulo-abertura-hero {
+    margin: -2rem -1.2rem 2rem;
+    padding: 2rem 1.2rem;
+    min-height: 300px;
+  }
+
+  .texto-colunas {
+    column-count: 1;
+    text-align: left;
+  }
+
+  .texto-colunas p,
+  .texto-flutuante p {
+    hyphens: none;
+  }
+
+  .figura-largura-plena {
+    margin: 2rem -1.2rem;
+  }
+
+  .figura-float-esquerda,
+  .figura-float-direita,
+  .figura-pequena {
+    float: none;
+    width: 100%;
+    max-width: none;
+    margin: 1.5rem 0;
+  }
+
+  .par-imagens,
+  .trio-imagens {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .dado {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  .dado-numero { min-width: auto; }
+
+  .capitulo-cabeca { margin-bottom: 2rem; }
+
+  .topico-titulo { font-size: 1.5rem; }
+
+  .citacao {
+    font-size: 1.2rem;
+    padding: 1.5rem 1.2rem;
+  }
+
+  .nav-fab {
+    bottom: calc(0.8rem + env(safe-area-inset-bottom, 0px));
+    right: 0.8rem;
+    width: 44px;
+    height: 44px;
+  }
+}

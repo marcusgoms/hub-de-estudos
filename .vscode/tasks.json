@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Abrir o Hub de Estudos",
+      "type": "shell",
+      "command": "${workspaceFolder}\\abrir.bat",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "silent", "panel": "dedicated" }
+    }
+  ]
+}

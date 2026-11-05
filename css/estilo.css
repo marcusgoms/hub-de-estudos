@@ -1,0 +1,329 @@
+/* ================================================================
+   HUB DE ESTUDOS — CSS BASE
+   Identidade visual compartilhada entre todos os estudos
+================================================================ */
+
+:root {
+  color-scheme: light;
+  /* Cores — tema claro (padrão) */
+  --preto: #1a1a1a;
+  --preto-suave: #2a2a2a;
+  --cinza-escuro: #333;
+  --cinza: #666;
+  --cinza-claro: #999;
+  --borda: #e5ddd0;
+  --creme: #f5efe3;
+  --creme-forte: #ede4d1;
+  --papel: #fdfaf4;
+  --superficie: #ffffff;
+  --terracota: #b85c38;
+  --terracota-escuro: #8a3b1f;
+  --terracota-vivo: #d16b3f;
+  --dourado: #c9a25e;
+
+  /* Tipografia */
+  --fonte-titulo: "Playfair Display", "Georgia", serif;
+  --fonte-texto: "Lora", "Georgia", serif;
+  --fonte-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --fonte-mono: "JetBrains Mono", "Courier New", monospace;
+
+  /* Espaçamento (antes só existiam no bloco escuro) */
+  --larg-container: 1200px;
+  --larg-leitura: 720px;
+  --respiro-secao: 7rem;
+  --respiro-paragrafo: 1.1rem;
+
+  /* Transições */
+  --tr-rapida: 160ms ease;
+  --tr-media: 300ms ease;
+}
+
+/* ================================================================
+   TEMA ESCURO
+   O :root define o claro; os blocos escuros apenas redefinem tokens.
+   Guarda `:not([data-theme="light"])` para o toggle sempre vencer.
+================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --preto: #f0ebe1;
+    --preto-suave: #d4cfc4;
+    --cinza-escuro: #b8b3a8;
+    --cinza: #8a857b;
+    --cinza-claro: #5a564f;
+    --borda: #34302a;
+    --creme: #1d1a16;
+    --creme-forte: #26221c;
+    --papel: #16130f;
+    --superficie: #221e18;
+    --terracota: #d87a56;
+    --terracota-escuro: #e89670;
+    --terracota-vivo: #e07a4f;
+    --dourado: #d4b075;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --preto: #f0ebe1;
+  --preto-suave: #d4cfc4;
+  --cinza-escuro: #b8b3a8;
+  --cinza: #8a857b;
+  --cinza-claro: #5a564f;
+  --borda: #34302a;
+  --creme: #1d1a16;
+  --creme-forte: #26221c;
+  --papel: #16130f;
+  --superficie: #221e18;
+  --terracota: #d87a56;
+  --terracota-escuro: #e89670;
+  --terracota-vivo: #e07a4f;
+  --dourado: #d4b075;
+
+}
+
+/* ================================================================
+   RESET LEVE
+================================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--preto);
+  background: var(--papel);
+  font-feature-settings: "liga", "kern", "onum";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--terracota-escuro);
+  text-decoration: none;
+  transition: color var(--tr-rapida);
+}
+
+a:hover {
+  color: var(--terracota);
+}
+
+/* ================================================================
+   BARRA DE NAVEGAÇÃO SUPERIOR (visível em todas as páginas)
+================================================================ */
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(253, 250, 244, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--borda);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .topo {
+    background: rgba(22, 19, 15, 0.92);
+  }
+}
+
+:root[data-theme="dark"] .topo {
+  background: rgba(22, 19, 15, 0.92);
+}
+
+.topo--escuro {
+  background: rgba(12, 13, 18, 0.95) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.topo--escuro .topo-logo { color: #D4A053; }
+.topo--escuro .topo-logo::before { background: #D4A053; }
+.topo--escuro .topo-nav a { color: #8A8885; }
+.topo--escuro .topo-nav a:hover,
+.topo--escuro .topo-nav a.ativo { color: #E8E6E3; }
+
+.topo-interior {
+  max-width: var(--larg-container);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.topo-logo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: var(--preto);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.topo-logo::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: var(--terracota);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.topo-nav {
+  display: flex;
+  gap: 2rem;
+  font-family: var(--fonte-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.topo-nav a {
+  color: var(--cinza);
+}
+
+.topo-nav a:hover,
+.topo-nav a.ativo {
+  color: var(--preto);
+}
+
+.topo-direita {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.tema-botao {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--cinza-escuro);
+  border: 1px solid var(--borda);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--tr-rapida), border-color var(--tr-rapida), background var(--tr-rapida);
+}
+
+.tema-botao:hover {
+  color: var(--terracota);
+  border-color: var(--terracota);
+  background: var(--creme);
+}
+
+.tema-icone {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.tema-mobile { display: none; }
+
+.tema-icone-lua { display: none; }
+
+:root[data-theme="dark"] .tema-icone-sol { display: none; }
+:root[data-theme="dark"] .tema-icone-lua { display: block; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .tema-icone-sol { display: none; }
+  :root:not([data-theme="light"]) .tema-icone-lua { display: block; }
+}
+
+/* ================================================================
+   RODAPÉ
+================================================================ */
+
+.rodape {
+  margin-top: 6rem;
+  padding: 3rem 1.5rem 2rem;
+  border-top: 1px solid var(--borda);
+  background: var(--creme);
+}
+
+.rodape-interior {
+  max-width: var(--larg-container);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--fonte-sans);
+  font-size: 0.85rem;
+  color: var(--cinza);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   COMPONENTES COMPARTILHADOS
+================================================================ */
+
+.container {
+  max-width: var(--larg-container);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.leitura {
+  max-width: var(--larg-leitura);
+  margin: 0 auto;
+}
+
+.selo {
+  display: inline-block;
+  font-family: var(--fonte-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.divisor {
+  width: 60px;
+  height: 2px;
+  background: var(--terracota);
+  margin: 2.5rem 0;
+}
+
+.divisor.central {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================================================================
+   RESPONSIVO BASE
+================================================================ */
+
+@media (max-width: 640px) {
+  html { font-size: 16px; }
+  .topo-interior { padding: 0.9rem 1.2rem; gap: 1rem; }
+  .topo-nav { gap: 1rem; font-size: 0.75rem; letter-spacing: 0.1em; }
+  .topo-logo { font-size: 1rem; }
+  .rodape-interior { flex-direction: column; gap: 1rem; text-align: center; }
+}
