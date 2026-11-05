@@ -713,11 +713,13 @@ body.plataforma {
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.area-card:hover {
+a.area-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   color: #fff;
 }
+
+div.area-card { cursor: default; }
 
 .area-card-nome {
   font-family: var(--fonte-sans);
@@ -879,4 +881,170 @@ body.plataforma {
   .btn-primario, .btn-secundario { width: 100%; justify-content: center; }
   .areas-grid { grid-template-columns: 1fr; }
   .card-plat { flex: 0 0 150px; }
+}
+
+/* ================================================================
+   PITCH DE ABERTURA
+================================================================ */
+
+.pitch {
+  padding: 2.5rem max(48px, env(safe-area-inset-left, 0px)) 0;
+}
+
+.pitch-texto {
+  max-width: 760px;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--plat-texto);
+  letter-spacing: -0.005em;
+}
+
+.pitch-texto a {
+  color: var(--plat-acento);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+}
+
+.pitch-texto a:hover {
+  border-color: var(--plat-acento);
+}
+
+/* ================================================================
+   BOTÃO YOUTUBE NO TOPO
+================================================================ */
+
+.topo-youtube {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: #FF0000;
+  color: #fff !important;
+  font-family: var(--fonte-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background 200ms ease, transform 200ms ease;
+  flex-shrink: 0;
+}
+
+.topo-youtube:hover {
+  background: #CC0000;
+  transform: translateY(-1px);
+}
+
+/* ================================================================
+   FAIXA DO CANAL
+================================================================ */
+
+.canal-faixa {
+  margin-top: 3.5rem;
+  background: linear-gradient(135deg, #0F1115 0%, #15181F 55%, #1C1F27 100%);
+  border-top: 1px solid rgba(212, 160, 83, 0.15);
+  border-bottom: 1px solid rgba(212, 160, 83, 0.15);
+  padding: 3rem max(48px, env(safe-area-inset-left, 0px));
+  scroll-margin-top: 80px;
+}
+
+.canal-faixa-interior {
+  max-width: var(--larg-container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.canal-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 0 2px rgba(212, 160, 83, 0.35);
+}
+
+.canal-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.canal-rotulo {
+  font-family: var(--fonte-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #D4A053;
+  margin-bottom: 0.4rem;
+}
+
+.canal-nome {
+  font-family: var(--fonte-titulo);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #E8E6E3;
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
+}
+
+.canal-desc {
+  font-size: 0.9rem;
+  color: rgba(232, 230, 227, 0.72);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 560px;
+}
+
+.canal-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: #FF0000;
+  color: #fff;
+  font-family: var(--fonte-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 200ms ease, transform 200ms ease;
+}
+
+.canal-cta:hover {
+  background: #CC0000;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 860px) {
+  .canal-faixa-interior {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+  .canal-avatar { width: 100px; height: 100px; }
+  .canal-nome { font-size: 1.5rem; }
+  .canal-desc { font-size: 0.85rem; }
+}
+
+@media (max-width: 720px) {
+  .topo-youtube span { display: none; }
+  .topo-youtube {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+  }
+  .pitch { padding: 1.75rem 16px 0; }
+  .pitch-texto { font-size: 1rem; }
+  .canal-faixa { padding: 2.5rem 16px; margin-top: 2.5rem; }
 }
