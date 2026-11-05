@@ -177,13 +177,19 @@ a:hover {
 
 .topo-logo {
   font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: 0.01em;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 1.55rem;
+  letter-spacing: -0.005em;
   color: var(--preto);
+  line-height: 1;
 }
 
-.topo-logo-k { color: #B8842E; }
+.topo-logo-k {
+  color: #B8842E;
+  font-style: normal;
+  font-weight: 900;
+}
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .topo-logo-k { color: #D4A053; }
@@ -195,11 +201,25 @@ a:hover {
   display: flex;
   gap: 2rem;
   font-family: var(--fonte-sans);
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 500;
 }
+
+.topo-divisor {
+  display: inline-block;
+  width: 1px;
+  height: 22px;
+  background: #B8842E;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .topo-divisor { background: #D4A053; opacity: 0.5; }
+}
+:root[data-theme="dark"] .topo-divisor { background: #D4A053; opacity: 0.5; }
 
 .topo-nav a {
   color: var(--cinza);
@@ -324,7 +344,8 @@ a:hover {
 @media (max-width: 640px) {
   html { font-size: 16px; }
   .topo-interior { padding: 0.9rem 1.2rem; gap: 1rem; }
-  .topo-nav { gap: 1rem; font-size: 0.75rem; letter-spacing: 0.1em; }
-  .topo-logo { font-size: 1rem; }
+  .topo-nav { gap: 1rem; font-size: 0.7rem; letter-spacing: 0.1em; }
+  .topo-logo { font-size: 1.3rem; }
+  .topo-divisor { display: none; }
   .rodape-interior { flex-direction: column; gap: 1rem; text-align: center; }
 }

@@ -95,7 +95,7 @@ body.plataforma {
 .plataforma .topo-esquerda {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.75rem;
   min-width: 0;
 }
 
