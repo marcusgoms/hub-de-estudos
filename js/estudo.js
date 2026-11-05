@@ -171,6 +171,22 @@
     });
   }
 
+  // ----------------- Barra que recolhe ao rolar -----------------
+  var topo = document.querySelector('.topo');
+  if (topo) {
+    var ultimoY = window.scrollY;
+    var limiar = 60;
+    window.addEventListener('scroll', function () {
+      var atualY = window.scrollY;
+      if (atualY > limiar && atualY > ultimoY) {
+        topo.classList.add('topo-escondido');
+      } else {
+        topo.classList.remove('topo-escondido');
+      }
+      ultimoY = atualY;
+    }, { passive: true });
+  }
+
   // ----------------- Animações no scroll -----------------
   var alvosAnima = document.querySelectorAll(
     '.topico, .bloco-grid, .par-imagens, .trio-imagens, ' +
