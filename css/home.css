@@ -884,25 +884,10 @@ div.area-card { cursor: default; }
 }
 
 /* ================================================================
-   PITCH DE ABERTURA
+   LINK DO CANAL NO RODAPÉ
 ================================================================ */
 
-.pitch {
-  padding: 2.5rem max(48px, env(safe-area-inset-left, 0px)) 0;
-}
-
-.pitch-texto {
-  max-width: 760px;
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-size: 1.15rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--plat-texto);
-  letter-spacing: -0.005em;
-}
-
-.pitch-texto a {
+.rodape-plat-desc a {
   color: var(--plat-acento);
   text-decoration: none;
   font-weight: 700;
@@ -910,7 +895,7 @@ div.area-card { cursor: default; }
   transition: border-color 200ms ease;
 }
 
-.pitch-texto a:hover {
+.rodape-plat-desc a:hover {
   border-color: var(--plat-acento);
 }
 
@@ -1044,7 +1029,5 @@ div.area-card { cursor: default; }
     border-radius: 50%;
     justify-content: center;
   }
-  .pitch { padding: 1.75rem 16px 0; }
-  .pitch-texto { font-size: 1rem; }
   .canal-faixa { padding: 2.5rem 16px; margin-top: 2.5rem; }
 }
