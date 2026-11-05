@@ -74,8 +74,8 @@ body.plataforma {
   background: rgba(12, 13, 18, 0.95) !important;
 }
 
-.plataforma .topo-logo { color: var(--plat-acento); }
-.plataforma .topo-logo::before { background: var(--plat-acento); }
+.plataforma .topo-logo { color: var(--plat-texto); }
+.plataforma .topo-logo-k { color: var(--plat-acento); }
 .plataforma .topo-nav a { color: var(--plat-texto-muted); }
 .plataforma .topo-nav a:hover,
 .plataforma .topo-nav a.ativo { color: var(--plat-texto); }
@@ -758,7 +758,8 @@ body.plataforma {
   font-family: var(--fonte-titulo);
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--plat-acento);
+  letter-spacing: 0.01em;
+  color: var(--plat-texto);
   margin-bottom: 0.6rem;
 }
 

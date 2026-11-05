@@ -179,21 +179,17 @@ a:hover {
   font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: 1.15rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   color: var(--preto);
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
 }
 
-.topo-logo::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background: var(--terracota);
-  border-radius: 50%;
-  display: inline-block;
+.topo-logo-k { color: #B8842E; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .topo-logo-k { color: #D4A053; }
 }
+
+:root[data-theme="dark"] .topo-logo-k { color: #D4A053; }
 
 .topo-nav {
   display: flex;

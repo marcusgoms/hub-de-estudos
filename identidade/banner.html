@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Kosmopolis — banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0C0D12; overflow: hidden; }
+  svg { display: block; width: 2560px; height: 1440px; }
+  body.faixa svg { margin-top: -508px; }
+  .nome { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 210px; letter-spacing: 2px; fill: #E8E6E3; }
+  .nome .k { fill: #D4A053; }
+</style>
+</head>
+<body>
+<svg id="banner" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="fundo" cx="1280" cy="720" r="1400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#181922"/>
+      <stop offset="0.55" stop-color="#101118"/>
+      <stop offset="1" stop-color="#0C0D12"/>
+    </radialGradient>
+  </defs>
+  <rect width="2560" height="1440" fill="url(#fundo)"/>
+  <g id="aneis" fill="none" stroke="#D4A053"></g>
+  <g id="rede"></g>
+  <text class="nome" x="1280" y="795" text-anchor="middle"><tspan class="k">K</tspan>osmopolis</text>
+</svg>
+
+<script>
+(function () {
+  if (location.search.indexOf('faixa') !== -1) document.body.classList.add('faixa');
+
+  var NS = 'http://www.w3.org/2000/svg', cx = 1280, cy = 720;
+  var aneis = document.getElementById('aneis');
+  var rede = document.getElementById('rede');
+  var raios = [700, 820, 960, 1120, 1310, 1540];
+  var opac  = [0.32, 0.25, 0.19, 0.14, 0.10, 0.07];
+  raios.forEach(function (r, i) {
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r);
+    c.setAttribute('stroke-width', i === 0 ? 3 : 1.5);
+    c.setAttribute('opacity', opac[i]);
+    aneis.appendChild(c);
+  });
+
+  function ponto(r, graus) {
+    var a = graus * Math.PI / 180;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  }
+  var nos = {
+    a: [700, 6],   b: [700, 186],
+    c: [820, -14], d: [820, 160],
+    e: [960, 9],   f: [960, 194],
+    g: [1120, -6], h: [1120, 172],
+    i: [1310, 16], j: [1310, 203],
+    k: [1540, -10], l: [1540, 168],
+    m: [960, -32], n: [960, 148],
+    o: [1120, 26], p: [1120, -154]
+  };
+  var ligacoes = [['a','c'],['c','g'],['a','e'],['e','i'],['g','k'],['e','g'],
+                  ['b','d'],['d','h'],['b','f'],['f','j'],['h','l'],['f','h'],
+                  ['c','m'],['d','n'],['e','o'],['f','p']];
+
+  ligacoes.forEach(function (par) {
+    var p1 = ponto(nos[par[0]][0], nos[par[0]][1]);
+    var p2 = ponto(nos[par[1]][0], nos[par[1]][1]);
+    var l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', p1[0]); l.setAttribute('y1', p1[1]);
+    l.setAttribute('x2', p2[0]); l.setAttribute('y2', p2[1]);
+    l.setAttribute('stroke', '#D4A053'); l.setAttribute('stroke-width', 1.5); l.setAttribute('opacity', 0.28);
+    rede.appendChild(l);
+  });
+
+  Object.keys(nos).forEach(function (k, idx) {
+    var p = ponto(nos[k][0], nos[k][1]);
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]);
+    c.setAttribute('r', idx % 4 === 0 ? 9 : 6);
+    c.setAttribute('fill', '#D4A053'); c.setAttribute('opacity', 0.85);
+    rede.appendChild(c);
+  });
+})();
+</script>
+</body>
+</html>
