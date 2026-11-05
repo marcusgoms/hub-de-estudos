@@ -119,6 +119,12 @@
   }, { passive: true });
   atualizarAtivo();
 
+  // Links diretos: a rolagem suave do CSS nao completa durante o carregamento
+  window.addEventListener('load', function () {
+    var alvo = location.hash && document.getElementById(location.hash.slice(1));
+    if (alvo) window.scrollTo({ top: topoAbs(alvo) - 80, behavior: 'instant' });
+  });
+
   // ----------------- Painel flutuante (tablet + mobile) -----------------
   var fab = document.querySelector('.nav-fab');
   var painel = document.querySelector('.nav-painel');
