@@ -177,19 +177,22 @@ a:hover {
 
 .topo-logo {
   font-family: var(--fonte-titulo);
-  font-weight: 800;
-  font-style: italic;
+  font-weight: 600;
   font-size: 1.55rem;
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
   color: var(--preto);
   line-height: 1;
 }
 
 .topo-logo-k {
   color: #B8842E;
-  font-style: normal;
   font-weight: 900;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .topo-logo { font-weight: 400; }
+}
+:root[data-theme="dark"] .topo-logo { font-weight: 400; }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .topo-logo-k { color: #D4A053; }
