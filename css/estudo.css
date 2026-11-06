@@ -779,6 +779,9 @@
 .bloco-grid-imagem-texto { grid-template-columns: 5fr 7fr; }
 .bloco-grid-texto-imagem { grid-template-columns: 7fr 5fr; }
 
+/* A figura vem antes no HTML para o texto poder contorná-la no tablet. */
+.bloco-grid-texto-imagem > figure { order: 2; }
+
 .bloco-grid > * {
   display: flex;
   flex-direction: column;
@@ -1286,8 +1289,48 @@
   }
 }
 
-/* Até 1280px as barras laterais espremem o texto: imagem e texto empilham. */
-@media (max-width: 1280px) {
+/* Tablet e notebook pequeno: o texto contorna a imagem, sem vazio embaixo dela. */
+@media (min-width: 721px) and (max-width: 1280px) {
+  .bloco-grid-imagem-texto,
+  .bloco-grid-texto-imagem {
+    display: block;
+  }
+
+  .bloco-grid-imagem-texto::after,
+  .bloco-grid-texto-imagem::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .bloco-grid-imagem-texto > div,
+  .bloco-grid-texto-imagem > div {
+    display: block;
+  }
+
+  .bloco-grid-imagem-texto > figure,
+  .bloco-grid-texto-imagem > figure {
+    width: 42%;
+    margin-bottom: 1.5rem;
+  }
+
+  .bloco-grid-imagem-texto > figure {
+    float: left;
+    margin-right: 2rem;
+  }
+
+  .bloco-grid-texto-imagem > figure {
+    float: right;
+    margin-left: 2rem;
+  }
+
+  .bloco-grid-texto-imagem figure img {
+    object-position: right top;
+  }
+}
+
+/* Celular: imagem e texto empilham. */
+@media (max-width: 720px) {
   .bloco-grid-imagem-texto,
   .bloco-grid-texto-imagem {
     grid-template-columns: 1fr;
