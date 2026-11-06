@@ -876,6 +876,7 @@
 }
 
 .figura-legenda {
+  text-align: left;
   font-family: var(--fonte-sans);
   font-size: 0.78rem;
   line-height: 1.5;
