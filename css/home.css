@@ -15,6 +15,7 @@ body.plataforma {
   --plat-acento-hover:#A07425;
   --plat-vidro:       rgba(0,0,0,0.05);
   --plat-vidro-hover: rgba(0,0,0,0.08);
+  --plat-sombra:      rgba(74, 52, 24, 0.34);
 
   --cat-arqueologia:  #C85A36;
   --cat-debunking:    #2D9E6F;
@@ -41,6 +42,7 @@ body.plataforma {
     --plat-acento-hover:#E0B06A;
     --plat-vidro:       rgba(255,255,255,0.06);
     --plat-vidro-hover: rgba(255,255,255,0.12);
+    --plat-sombra:      rgba(0, 0, 0, 0.55);
   }
 }
 
@@ -56,6 +58,7 @@ body.plataforma {
   --plat-acento-hover:#E0B06A;
   --plat-vidro:       rgba(255,255,255,0.06);
   --plat-vidro-hover: rgba(255,255,255,0.12);
+  --plat-sombra:      rgba(0, 0, 0, 0.55);
 }
 
 /* --- Nav da plataforma --- */
@@ -1045,6 +1048,8 @@ div.area-card { cursor: default; }
   min-height: 0;
   padding: 1.25rem 0 1.5rem;
   overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .hero-trilho {
@@ -1070,12 +1075,15 @@ div.area-card { cursor: default; }
   border-radius: 14px;
   opacity: 0.6;
   transform: scale(0.965);
-  transition: opacity var(--hmov), transform var(--hmov);
+  transition: opacity var(--hmov), transform var(--hmov), box-shadow var(--hmov);
 }
 
+/* Deslocada para cima: a sombra some antes de chegar à linha de progresso */
 .hero-slide.ativo {
+  z-index: 1;
   opacity: 1;
   transform: none;
+  box-shadow: 0 -6px 18px -8px var(--plat-sombra), 0 -8px 28px -14px var(--plat-sombra);
 }
 
 /* Nos vizinhos a imagem aparece limpa: o escurecimento lateral é só para o texto do card ativo */
