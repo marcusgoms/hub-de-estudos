@@ -1076,7 +1076,6 @@ div.area-card { cursor: default; }
 .hero-slide.ativo {
   opacity: 1;
   transform: none;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
 }
 
 /* Nos vizinhos a imagem aparece limpa: o escurecimento lateral é só para o texto do card ativo */
