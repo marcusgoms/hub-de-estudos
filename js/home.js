@@ -171,6 +171,57 @@
       return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     };
 
+    // Termo curto só vale no começo da palavra: "ur" acha Ur e Uruk, não "cultura"
+    var contem = function (texto, termo) {
+      if (termo.length > 3) return texto.indexOf(termo) >= 0;
+      return (' ' + texto.replace(/[^a-z0-9]+/g, ' ')).indexOf(' ' + termo) >= 0;
+    };
+
+    var separarPalavras = function (s) {
+      return s.split(/[^a-z0-9]+/).filter(function (p) { return p.length >= 3; });
+    };
+
+    // Conta letras trocadas, faltando, sobrando ou de lugar invertido entre duas palavras
+    var distancia = function (a, b) {
+      var linhas = [];
+      for (var i = 0; i <= a.length; i++) {
+        linhas[i] = [i];
+        for (var j = 1; j <= b.length; j++) {
+          if (i === 0) { linhas[0][j] = j; continue; }
+          var custo = a[i - 1] === b[j - 1] ? 0 : 1;
+          linhas[i][j] = Math.min(linhas[i - 1][j] + 1, linhas[i][j - 1] + 1, linhas[i - 1][j - 1] + custo);
+          if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+            linhas[i][j] = Math.min(linhas[i][j], linhas[i - 2][j - 2] + 1);
+          }
+        }
+      }
+      return linhas[a.length][b.length];
+    };
+
+    // Palavra curta tolera menos erro, senão quase tudo pareceria igual
+    var erroAceito = function (termo) {
+      if (termo.length < 4) return 0;
+      return termo.length === 4 ? 1 : 2;
+    };
+
+    var menorErro = function (termo, palavras) {
+      var limite = erroAceito(termo);
+      var menor = Infinity;
+      if (!limite) return menor;
+      palavras.forEach(function (p) {
+        var d = distancia(termo, p);
+        if (p.length > termo.length) d = Math.min(d, distancia(termo, p.slice(0, termo.length)));
+        if (d <= limite && d < menor) menor = d;
+      });
+      return menor;
+    };
+
+    var erroTotal = function (termos, texto, palavras) {
+      return termos.reduce(function (soma, t) {
+        return soma + (contem(texto, t) ? 0 : menorErro(t, palavras));
+      }, 0);
+    };
+
     var indice = [];
     var vistos = {};
     document.querySelectorAll('section.carrossel:not(#continuar) .fileira-horizontal .carrossel-trilho > *').forEach(function (card) {
@@ -185,8 +236,10 @@
       var fileira = card.closest('section').querySelector('h2').textContent;
       var tipo = card.querySelector('.card-plat-sub').textContent.split(' · ')[0];
       var capitulos = ficha ? Array.from(ficha.querySelectorAll('.ficha-capitulos a')).map(function (a) {
-        return { nome: a.textContent, href: a.getAttribute('href'), busca: normalizar(a.textContent) };
+        var nome = normalizar(a.textContent);
+        return { nome: a.textContent, href: a.getAttribute('href'), busca: nome, palavras: separarPalavras(nome) };
       }) : [];
+      var textoBusca = normalizar([titulo, tipo, fileira, selo ? selo.textContent : '', ficha ? ficha.querySelector('.ficha-resumo').textContent : ''].join(' ') + ' ' + capitulos.map(function (c) { return c.nome; }).join(' '));
       indice.push({
         titulo: titulo,
         tipo: tipo,
@@ -195,7 +248,9 @@
         capa: img ? img.getAttribute('src') : '',
         capitulos: capitulos,
         tituloBusca: normalizar(titulo),
-        busca: normalizar([titulo, tipo, fileira, selo ? selo.textContent : '', ficha ? ficha.querySelector('.ficha-resumo').textContent : ''].join(' ') + ' ' + capitulos.map(function (c) { return c.nome; }).join(' '))
+        tituloPalavras: separarPalavras(normalizar(titulo)),
+        busca: textoBusca,
+        palavras: separarPalavras(textoBusca)
       });
     });
 
@@ -238,18 +293,42 @@
       }
 
       var achados = indice.filter(function (i) {
-        return termos.every(function (t) { return i.busca.indexOf(t) >= 0; });
+        return termos.every(function (t) { return contem(i.busca, t); });
       }).map(function (i) {
         var capitulo = i.capitulos.filter(function (c) {
-          return termos.every(function (t) { return c.busca.indexOf(t) >= 0; });
+          return termos.every(function (t) { return contem(c.busca, t); });
         })[0];
-        var noTitulo = termos.every(function (t) { return i.tituloBusca.indexOf(t) >= 0; });
+        var noTitulo = termos.every(function (t) { return contem(i.tituloBusca, t); });
         return { item: i, capitulo: capitulo, nota: (noTitulo ? 4 : 0) + (i.href ? 2 : 0) + (capitulo ? 1 : 0) };
-      }).sort(function (a, b) { return b.nota - a.nota; });
+      });
 
-      buscaAviso.textContent = achados.length
-        ? achados.length + (achados.length > 1 ? ' resultados' : ' resultado')
-        : 'Nada encontrado para "' + consulta + '". Tente outro tema.';
+      // Só procura parecidos quando a palavra exata não achou nada
+      var aproximada = !achados.length;
+      if (aproximada) {
+        // "de", "do" e parecidos não ajudam a achar nada
+        var principais = termos.filter(function (t) { return t.length > 2; });
+        achados = !principais.length ? [] : indice.map(function (i) {
+          var capitulo = i.capitulos.filter(function (c) {
+            return erroTotal(principais, c.busca, c.palavras) < Infinity;
+          })[0];
+          var noTitulo = erroTotal(principais, i.tituloBusca, i.tituloPalavras) < Infinity;
+          return { item: i, capitulo: capitulo, erro: erroTotal(principais, i.busca, i.palavras), nota: (noTitulo ? 4 : 0) + (i.href ? 2 : 0) + (capitulo ? 1 : 0) };
+        }).filter(function (a) { return a.erro < Infinity; });
+
+        // Fica só com os mais parecidos, para não trazer coincidências
+        var menor = Math.min.apply(null, achados.map(function (a) { return a.erro; }));
+        achados = achados.filter(function (a) { return a.erro === menor; });
+      }
+
+      achados.sort(function (a, b) { return (a.erro || 0) - (b.erro || 0) || b.nota - a.nota; });
+
+      if (!achados.length) {
+        buscaAviso.textContent = 'Nada encontrado para "' + consulta + '". Tente outro tema.';
+      } else if (aproximada) {
+        buscaAviso.textContent = 'Resultados parecidos com "' + consulta + '"';
+      } else {
+        buscaAviso.textContent = achados.length + (achados.length > 1 ? ' resultados' : ' resultado');
+      }
       achados.slice(0, 12).forEach(function (a) { mostrarResultado(a.item, a.capitulo); });
     };
 
