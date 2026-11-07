@@ -186,6 +186,7 @@
 /* -------- LAYOUT PRINCIPAL -------- */
 
 .estudo-layout {
+  scroll-margin-top: 70px;
   max-width: 1320px;
   margin: 0 auto;
   padding: 4rem 1.5rem 0;

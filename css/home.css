@@ -472,6 +472,7 @@ body.plataforma {
 
 .carrossel {
   padding: 2rem 0 0.5rem;
+  scroll-margin-top: 70px;
 }
 
 .carrossel-cabeca {
@@ -1314,4 +1315,11 @@ div.area-card { cursor: default; }
 
 @media (hover: hover) {
   .giro .fileira-seta { display: flex; }
+}
+
+/* O menu de seis itens não cabe na barra abaixo de 1024 px */
+@media (max-width: 1023px) {
+  .plataforma .topo-nav,
+  .plataforma .topo-divisor { display: none; }
+  .menu-hamburguer { display: flex; }
 }

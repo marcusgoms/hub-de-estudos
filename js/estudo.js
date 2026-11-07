@@ -152,6 +152,8 @@
   }
 
   if (fab) fab.addEventListener('click', abrirPainel);
+  // Link "Ver capítulos" do hub: sem a lista lateral na tela, abre o painel
+  if (location.hash === '#capitulos' && fab && getComputedStyle(fab).display !== 'none') abrirPainel();
   if (fundo) fundo.addEventListener('click', fecharPainel);
   if (fechar) fechar.addEventListener('click', fecharPainel);
 
