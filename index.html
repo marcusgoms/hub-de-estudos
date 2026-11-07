@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/estilo.css?v=5">
-<link rel="stylesheet" href="css/home.css?v=15">
+<link rel="stylesheet" href="css/home.css?v=18">
 </head>
 <body class="plataforma">
 
@@ -66,6 +66,7 @@
 </nav>
 
 <section class="hero-plat hero-carrossel" aria-roledescription="carrossel" aria-label="Apostilas em destaque">
+  <div class="hero-trilho">
   <article class="hero-slide ativo">
     <div class="hero-plat-bg">
       <img src="estudos/sumerios/imagens/capa_ilustracao.jpg" alt="" class="hero-plat-img">
@@ -96,9 +97,9 @@
       </div>
     </div>
   </article>
-  <article class="hero-slide" aria-hidden="true">
+  <article class="hero-slide">
     <div class="hero-plat-bg">
-      <img src="estudos/potosi/imagens/capa_ilustracao.jpg" alt="" class="hero-plat-img hero-plat-img--topo">
+      <img src="estudos/potosi/imagens/capa_ilustracao_openai.jpg" alt="" class="hero-plat-img hero-plat-img--topo">
       <div class="hero-plat-overlay"></div>
       <div class="hero-plat-fade"></div>
     </div>
@@ -126,7 +127,7 @@
       </div>
     </div>
   </article>
-  <article class="hero-slide" aria-hidden="true">
+  <article class="hero-slide">
     <div class="hero-plat-bg">
       <img src="estudos/baia-dos-jarros/imagens/capa_ilustracao.jpg" alt="" class="hero-plat-img">
       <div class="hero-plat-overlay"></div>
@@ -156,11 +157,14 @@
       </div>
     </div>
   </article>
-  <div class="hero-bolinhas" role="group" aria-label="Escolher apostila em destaque">
-    <button class="hero-bolinha ativa" type="button" aria-label="Sumérios" aria-current="true"></button>
-    <button class="hero-bolinha" type="button" aria-label="Potosí"></button>
-    <button class="hero-bolinha" type="button" aria-label="Baía dos Jarros"></button>
   </div>
+  <button class="hero-sliver hero-sliver--esq" type="button" aria-label="Apostila anterior">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <button class="hero-sliver hero-sliver--dir" type="button" aria-label="Próxima apostila">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div class="hero-progresso" aria-hidden="true"><span></span></div>
 </section>
 
 <section class="carrossel" id="apostilas">
@@ -170,11 +174,12 @@
       <h2 class="carrossel-titulo">Apostilas publicadas</h2>
     </div>
   </div>
-  <div class="carrossel-trilho-wrap">
+    <!-- Computador e tablet largo usam a fileira horizontal; celular e tablet estreito, a vertical -->
+  <div class="carrossel-trilho-wrap fileira-horizontal">
     <div class="carrossel-trilho">
       <a href="estudos/potosi/index.html" class="card-plat">
         <div class="card-plat-thumb">
-          <img src="estudos/potosi/imagens/capa_ilustracao.jpg" alt="Potosí" loading="lazy">
+          <img src="estudos/potosi/imagens/capa_ilustracao_openai.jpg" alt="Potosí" loading="lazy">
           <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <span class="card-plat-dur">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
@@ -207,6 +212,28 @@
         </div>
         <div class="card-plat-titulo">Sumérios: a civilização de barro</div>
         <div class="card-plat-sub">Apostila · 5 capítulos</div>
+      </a>
+    </div>
+  </div>
+  <div class="carrossel-trilho-wrap fileira-vertical">
+    <div class="carrossel-trilho">
+      <a href="estudos/potosi/index.html" class="card-poster">
+        <div class="card-poster-thumb"><img src="estudos/potosi/imagens/capa_ilustracao_openai.jpg" alt="" loading="lazy" style="--foco: 72% 50%"></div>
+        <span class="badge badge--arqueologia">Arqueologia</span>
+        <div class="card-plat-titulo">Potosí: a montanha que financiou o mundo</div>
+        <div class="card-plat-sub">Apostila · 35 min</div>
+      </a>
+      <a href="estudos/baia-dos-jarros/index.html" class="card-poster">
+        <div class="card-poster-thumb"><img src="estudos/baia-dos-jarros/imagens/capa_ilustracao.jpg" alt="" loading="lazy" style="--foco: 72% 50%"></div>
+        <span class="badge badge--debunking">Debunking</span>
+        <div class="card-plat-titulo">Baía dos Jarros: as ânforas da Guanabara</div>
+        <div class="card-plat-sub">Apostila · 25 min</div>
+      </a>
+      <a href="estudos/sumerios/index.html" class="card-poster">
+        <div class="card-poster-thumb"><img src="estudos/sumerios/imagens/capa_ilustracao.jpg" alt="" loading="lazy" style="--foco: 82% 50%"></div>
+        <span class="badge badge--arqueologia">Arqueologia</span>
+        <div class="card-plat-titulo">Sumérios: a civilização de barro</div>
+        <div class="card-plat-sub">Apostila · 30 min</div>
       </a>
     </div>
   </div>
@@ -342,6 +369,6 @@
   </div>
 </footer>
 
-<script src="js/home.js?v=3"></script>
+<script src="js/home.js?v=5"></script>
 </body>
 </html>

@@ -97,61 +97,118 @@
       });
     }
   });
-  // --- Banner em carrossel ---
+  // --- Banner em carrossel: card central, vizinhos nas bordas, volta infinita ---
   var hero = document.querySelector('.hero-carrossel');
+  var trilhoHero = hero && hero.querySelector('.hero-trilho');
 
-  if (hero) {
-    var slides = Array.from(hero.querySelectorAll('.hero-slide'));
-    var bolinhas = Array.from(hero.querySelectorAll('.hero-bolinha'));
-    var atual = 0;
-    var relogio = null;
-    var travas = { mouse: false, foco: false };
-    var semAnimacao = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (trilhoHero) {
+    var reais = Array.from(trilhoHero.querySelectorAll('.hero-slide'));
+    var total = reais.length;
+    var copias = Math.min(2, total);
 
-    function mostrar(i) {
-      atual = (i + slides.length) % slides.length;
-      slides.forEach(function (s, n) {
-        s.classList.toggle('ativo', n === atual);
-        if (n === atual) s.removeAttribute('aria-hidden');
-        else s.setAttribute('aria-hidden', 'true');
-      });
-      bolinhas.forEach(function (b, n) {
-        b.classList.toggle('ativa', n === atual);
-        if (n === atual) b.setAttribute('aria-current', 'true');
-        else b.removeAttribute('aria-current');
-      });
-    }
-
-    function parar() {
-      clearInterval(relogio);
-      relogio = null;
-    }
-
-    function tocar() {
-      parar();
-      if (semAnimacao || travas.mouse || travas.foco || document.hidden) return;
-      relogio = setInterval(function () { mostrar(atual + 1); }, 7000);
-    }
-
-    bolinhas.forEach(function (b, n) {
-      b.addEventListener('click', function () { mostrar(n); tocar(); });
+    // Cópias feitas uma vez nas pontas, para sempre haver vizinho dos dois lados
+    reais.slice(-copias).reverse().forEach(function (s) {
+      trilhoHero.insertBefore(s.cloneNode(true), trilhoHero.firstChild);
+    });
+    reais.slice(0, copias).forEach(function (s) {
+      trilhoHero.appendChild(s.cloneNode(true));
     });
 
-    hero.addEventListener('mouseenter', function () { travas.mouse = true; parar(); });
-    hero.addEventListener('mouseleave', function () { travas.mouse = false; tocar(); });
-    hero.addEventListener('focusin', function () { travas.foco = true; parar(); });
-    hero.addEventListener('focusout', function () { travas.foco = false; tocar(); });
-    document.addEventListener('visibilitychange', tocar);
+    var todos = Array.from(trilhoHero.querySelectorAll('.hero-slide'));
+    var barra = hero.querySelector('.hero-progresso span');
+    var semAnimacao = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var pos = copias;
+    var andando = false;
+    var reserva = null;
+    var travas = { mouse: false, foco: false };
+
+    function aplicar() {
+      trilhoHero.style.setProperty('--i', pos);
+      todos.forEach(function (s, n) {
+        s.classList.toggle('ativo', n === pos);
+        s.inert = n !== pos;
+      });
+    }
+
+    function recomecarBarra() {
+      if (!barra) return;
+      barra.style.animation = 'none';
+      void barra.offsetWidth;
+      barra.style.animation = '';
+    }
+
+    function terminar() {
+      clearTimeout(reserva);
+      andando = false;
+      if (pos >= copias && pos < copias + total) return;
+      pos += pos < copias ? total : -total;
+      hero.classList.add('sem-transicao');
+      aplicar();
+      void trilhoHero.offsetWidth;
+      hero.classList.remove('sem-transicao');
+    }
+
+    function mover(direcao) {
+      if (andando) return;
+      andando = true;
+      pos += direcao;
+      aplicar();
+      recomecarBarra();
+      reserva = setTimeout(terminar, 750);
+    }
+
+    function pausar() {
+      hero.classList.toggle('pausado', travas.mouse || travas.foco);
+    }
+
+    trilhoHero.addEventListener('transitionend', function (e) {
+      if (e.target === trilhoHero && e.propertyName === 'transform') terminar();
+    });
+
+    if (barra && !semAnimacao) {
+      barra.addEventListener('animationend', function () { mover(1); });
+    }
+
+    hero.querySelectorAll('.hero-sliver').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        mover(b.classList.contains('hero-sliver--dir') ? 1 : -1);
+        if (e.detail > 0) b.blur();
+      });
+    });
+
+    hero.addEventListener('mouseenter', function () { travas.mouse = true; pausar(); });
+    hero.addEventListener('mouseleave', function () { travas.mouse = false; pausar(); });
+    hero.addEventListener('focusin', function () { travas.foco = true; pausar(); });
+    hero.addEventListener('focusout', function () { travas.foco = false; pausar(); });
+
+    var toqueX = null;
+    hero.addEventListener('touchstart', function (e) { toqueX = e.touches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', function (e) {
+      if (toqueX === null) return;
+      var d = e.changedTouches[0].clientX - toqueX;
+      toqueX = null;
+      if (Math.abs(d) > 40) mover(d < 0 ? 1 : -1);
+    }, { passive: true });
 
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
       if (menuLateral && menuLateral.classList.contains('aberto')) return;
       if (hero.getBoundingClientRect().bottom <= 0) return;
-      mostrar(atual + (e.key === 'ArrowRight' ? 1 : -1));
-      tocar();
+      mover(e.key === 'ArrowRight' ? 1 : -1);
     });
 
-    tocar();
+    // Ao girar o celular ou redimensionar, o card recentraliza sem deslizar
+    var fimResize = null;
+    window.addEventListener('resize', function () {
+      hero.classList.add('sem-transicao');
+      clearTimeout(fimResize);
+      fimResize = setTimeout(function () { hero.classList.remove('sem-transicao'); }, 150);
+    });
+
+    hero.classList.add('sem-transicao');
+    aplicar();
+    void trilhoHero.offsetWidth;
+    hero.classList.remove('sem-transicao');
   }
 })();
