@@ -216,9 +216,48 @@
       return menor;
     };
 
-    var erroTotal = function (termos, texto, palavras) {
+    var contarLetras = function (s) {
+      var conta = {};
+      for (var i = 0; i < s.length; i++) conta[s[i]] = (conta[s[i]] || 0) + 1;
+      return conta;
+    };
+
+    var naMesmaOrdem = function (termo, palavra) {
+      var pos = 0;
+      for (var i = 0; i < palavra.length && pos < termo.length; i++) {
+        if (palavra[i] === termo[pos]) pos++;
+      }
+      return pos === termo.length;
+    };
+
+    // Compara a quantidade de cada letra. Letra digitada que a palavra não tem elimina,
+    // a não ser que todas as letras da palavra também tenham sido digitadas.
+    var custoLetras = function (termo, palavra) {
+      var conta = contarLetras(palavra);
+      var digitadas = contarLetras(termo);
+      var sobra = 0;
+      Object.keys(digitadas).forEach(function (l) {
+        sobra += Math.max(0, digitadas[l] - (conta[l] || 0));
+      });
+      var acertos = termo.length - sobra;
+      var cobertura = acertos / palavra.length;
+      var sobraAceita = termo.length >= 8 ? 2 : 1;
+      if (sobra > 0 && (acertos < palavra.length || sobra > sobraAceita)) return Infinity;
+      if (sobra === 0 && cobertura < 0.3) return Infinity;
+      return sobra + (1 - cobertura) + (naMesmaOrdem(termo, palavra) ? 0 : 0.4) + (termo[0] === palavra[0] ? 0 : 0.3);
+    };
+
+    var menorCustoLetras = function (termo, palavras) {
+      if (termo.length < 3) return Infinity;
+      return palavras.reduce(function (menor, p) {
+        return Math.min(menor, custoLetras(termo, p));
+      }, Infinity);
+    };
+
+    // "fortes" são as palavras de título e capítulo: resumo longo daria coincidência demais
+    var erroTotal = function (termos, texto, palavras, fortes) {
       return termos.reduce(function (soma, t) {
-        return soma + (contem(texto, t) ? 0 : menorErro(t, palavras));
+        return soma + (contem(texto, t) ? 0 : Math.min(menorErro(t, palavras), menorCustoLetras(t, fortes)));
       }, 0);
     };
 
@@ -250,7 +289,8 @@
         tituloBusca: normalizar(titulo),
         tituloPalavras: separarPalavras(normalizar(titulo)),
         busca: textoBusca,
-        palavras: separarPalavras(textoBusca)
+        palavras: separarPalavras(textoBusca),
+        fortes: separarPalavras(normalizar(titulo + ' ' + fileira + ' ' + capitulos.map(function (c) { return c.nome; }).join(' ')))
       });
     });
 
@@ -309,18 +349,18 @@
         var principais = termos.filter(function (t) { return t.length > 2; });
         achados = !principais.length ? [] : indice.map(function (i) {
           var capitulo = i.capitulos.filter(function (c) {
-            return erroTotal(principais, c.busca, c.palavras) < Infinity;
+            return erroTotal(principais, c.busca, c.palavras, c.palavras) < Infinity;
           })[0];
-          var noTitulo = erroTotal(principais, i.tituloBusca, i.tituloPalavras) < Infinity;
-          return { item: i, capitulo: capitulo, erro: erroTotal(principais, i.busca, i.palavras), nota: (noTitulo ? 4 : 0) + (i.href ? 2 : 0) + (capitulo ? 1 : 0) };
+          var noTitulo = erroTotal(principais, i.tituloBusca, i.tituloPalavras, i.tituloPalavras) < Infinity;
+          return { item: i, capitulo: capitulo, erro: erroTotal(principais, i.busca, i.palavras, i.fortes), nota: (noTitulo ? 4 : 0) + (i.href ? 2 : 0) + (capitulo ? 1 : 0) };
         }).filter(function (a) { return a.erro < Infinity; });
 
         // Fica só com os mais parecidos, para não trazer coincidências
         var menor = Math.min.apply(null, achados.map(function (a) { return a.erro; }));
-        achados = achados.filter(function (a) { return a.erro === menor; });
+        achados = achados.filter(function (a) { return a.erro <= menor + 0.5; });
       }
 
-      achados.sort(function (a, b) { return (a.erro || 0) - (b.erro || 0) || b.nota - a.nota; });
+      achados.sort(function (a, b) { return b.nota - a.nota || (a.erro || 0) - (b.erro || 0); });
 
       if (!achados.length) {
         buscaAviso.textContent = 'Nada encontrado para "' + consulta + '". Tente outro tema.';
