@@ -97,6 +97,83 @@
       });
     }
   });
+  // --- Fileira de apostilas: gira para os dois lados, sem fim ---
+  document.querySelectorAll('.fileira-horizontal, .fileira-vertical').forEach(function (wrap) {
+    var trilho = wrap.querySelector('.carrossel-trilho');
+    var cards = Array.from(trilho.children);
+    if (cards.length < 4) return;
+
+    function copiar(card) {
+      var c = card.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.setAttribute('tabindex', '-1');
+      return c;
+    }
+
+    // Duas cópias de cada lado dão folga para um arrasto longo no celular
+    for (var i = 0; i < 2; i++) {
+      var antes = document.createDocumentFragment();
+      cards.forEach(function (card) {
+        antes.appendChild(copiar(card));
+        trilho.appendChild(copiar(card));
+      });
+      trilho.insertBefore(antes, trilho.firstChild);
+    }
+    trilho.querySelectorAll('img').forEach(function (img) { img.loading = 'eager'; });
+    wrap.classList.add('giro');
+
+    var vertical = wrap.classList.contains('fileira-vertical');
+    var periodo = 0;
+    var casa = 0;
+    var largura = 0;
+
+    function esquerda(el) { return el.getBoundingClientRect().left; }
+
+    // Horizontal: primeiro card junto da margem. Vertical: segundo card no centro.
+    function centralizar() {
+      var alvo = vertical ? cards[1] : cards[0];
+      var ajuste = vertical
+        ? (alvo.offsetWidth - trilho.clientWidth) / 2
+        : -parseFloat(getComputedStyle(trilho).scrollPaddingLeft);
+      periodo = esquerda(cards[cards.length - 1].nextElementSibling) - esquerda(cards[0]);
+      casa = trilho.scrollLeft + esquerda(alvo) - esquerda(trilho) + ajuste;
+      trilho.scrollLeft = casa;
+    }
+
+    // Parado longe do meio, volta um período inteiro: a tela não muda
+    var espera;
+    trilho.addEventListener('scroll', function () {
+      clearTimeout(espera);
+      espera = setTimeout(function () {
+        var voltas = periodo ? Math.round((trilho.scrollLeft - casa) / periodo) : 0;
+        if (voltas) trilho.scrollLeft -= voltas * periodo;
+      }, 140);
+    }, { passive: true });
+
+    function seta(lado, rotulo, desenho, sentido) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'fileira-seta fileira-seta--' + lado;
+      b.setAttribute('aria-label', rotulo);
+      b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + desenho + '"/></svg>';
+      b.addEventListener('click', function () {
+        var calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        trilho.scrollBy({ left: sentido * (esquerda(cards[1]) - esquerda(cards[0])), behavior: calmo ? 'auto' : 'smooth' });
+      });
+      wrap.appendChild(b);
+    }
+    seta('esq', 'Card anterior', 'm15 18-6-6 6-6', -1);
+    seta('dir', 'Próximo card', 'm9 18 6-6-6-6', 1);
+
+    // Só uma das fileiras aparece; ela se ajusta ao surgir e quando a largura muda
+    function ajustar() {
+      var w = trilho.clientWidth;
+      if (w && w !== largura) { largura = w; centralizar(); }
+    }
+    ajustar();
+    new ResizeObserver(ajustar).observe(trilho);
+  });
+
   // --- Banner em carrossel: card central, vizinhos nas bordas, volta infinita ---
   var hero = document.querySelector('.hero-carrossel');
   var trilhoHero = hero && hero.querySelector('.hero-trilho');

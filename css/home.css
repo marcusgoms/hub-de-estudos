@@ -1237,12 +1237,71 @@ div.area-card { cursor: default; }
 
 .card-poster:hover .card-poster-thumb img { transform: scale(1.04); }
 
-@media (min-width: 1081px) {
+@media (min-width: 900px) {
   .fileira-horizontal .card-plat { flex: 0 0 calc((100vw - 96px - 3rem) / 4); }
+  .fileira-horizontal .card-plat { flex-basis: calc((100cqw - 96px - 3rem) / 4); }
+}
+
+@media (min-width: 1081px) {
   .fileira-horizontal .card-plat-titulo { font-size: 1.05rem; }
   .fileira-horizontal .card-plat-sub { font-size: 0.82rem; }
 }
 
 @media (max-width: 720px) {
   .card-poster { flex: 0 0 150px; }
+}
+
+/* Fileira sem fim: quatro cards no meio, um vizinho aparecendo de cada lado.
+   A classe .giro vem do home.js; sem JavaScript a fileira fica alinhada à esquerda. */
+
+.carrossel-trilho-wrap.giro { container-type: inline-size; }
+
+.giro .carrossel-trilho {
+  padding: 6px 0 0;
+  margin-top: -6px;
+  scroll-behavior: auto;
+  scroll-padding-left: 48px;
+}
+
+.giro .carrossel-trilho::after { display: none; }
+
+.fileira-vertical.giro .carrossel-trilho { scroll-padding-left: 0; }
+.fileira-vertical.giro .card-poster { scroll-snap-align: center; }
+
+.card-poster-thumb.card-plat-thumb--grad { position: relative; }
+
+.fileira-seta {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileira-seta--esq { left: 0; }
+.fileira-seta--dir { right: 0; }
+
+.fileira-seta svg {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(12, 13, 18, 0.7);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.giro:hover .fileira-seta svg,
+.fileira-seta:focus-visible svg { opacity: 1; }
+
+@media (hover: hover) {
+  .giro .fileira-seta { display: flex; }
 }
