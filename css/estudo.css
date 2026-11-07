@@ -1508,3 +1508,62 @@
     font-size: 1.05rem;
   }
 }
+
+/* Leia a seguir: outras apostilas, depois dos créditos */
+.leia-seguir {
+  scroll-margin-top: 90px;
+  padding: 2rem 0 3rem;
+  border-top: 1px solid var(--borda);
+}
+
+.leia-seguir h2 {
+  margin: 0 0 1.2rem;
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--preto);
+}
+
+.leia-grade {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.leia-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--preto);
+  text-decoration: none;
+}
+
+.leia-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 0.35rem;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: opacity var(--tr-rapida);
+}
+
+.leia-card:hover { color: var(--terracota); }
+.leia-card:hover img { opacity: 0.85; }
+
+.leia-card-info {
+  font-family: var(--fonte-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--cinza);
+}
+
+.leia-card-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+@media (max-width: 720px) {
+  .leia-grade { grid-template-columns: minmax(0, 1fr); }
+}

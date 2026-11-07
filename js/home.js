@@ -146,6 +146,19 @@
     });
   });
 
+  // --- Selo "Novo": só na apostila mais recente, a primeira de "Publicadas recentemente" ---
+  var maisNova = document.querySelector('#apostilas a.card-plat');
+  if (maisNova) {
+    document.querySelectorAll('section:not(#continuar) a[href="' + maisNova.getAttribute('href') + '"]').forEach(function (card) {
+      var capa = card.querySelector('.card-plat-thumb, .card-poster-thumb');
+      if (!capa) return;
+      var selo = document.createElement('span');
+      selo.className = 'card-novo';
+      selo.textContent = 'Novo';
+      capa.appendChild(selo);
+    });
+  }
+
   // --- Fileira de apostilas: gira para os dois lados, sem fim ---
   document.querySelectorAll('.fileira-horizontal, .fileira-vertical').forEach(function (wrap) {
     var trilho = wrap.querySelector('.carrossel-trilho');
