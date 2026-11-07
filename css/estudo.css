@@ -1063,28 +1063,28 @@
 
 /* -------- FINAL DO ESTUDO -------- */
 
-.estudo-fim {
-  text-align: center;
-  padding: 4rem 0;
-  border-top: 1px solid var(--borda);
-  margin-top: 4rem;
-}
-
-.estudo-fim-frase {
-  font-family: var(--fonte-titulo);
-  font-style: italic;
-  font-size: 1.4rem;
+/* Fita de chegada: quem termina a apostila cruza a fita */
+.fita-fim {
+  margin: 3rem -1rem 2.5rem;
+  padding: 0.4rem 1rem;
+  background: #D4A053;
+  color: #1A1E24;
+  font-family: var(--fonte-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   line-height: 1.5;
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  color: var(--cinza-escuro);
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(-0.6deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
-.estudo-fim-selo {
-  font-family: var(--fonte-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: var(--terracota);
+.fita-fim.anima { transform: rotate(-0.6deg) scaleX(0.15); }
+.fita-fim.anima.visivel { transform: rotate(-0.6deg) scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fita-fim.anima { transform: rotate(-0.6deg); }
 }
 
 .creditos-imagens {
@@ -1509,11 +1509,10 @@
   }
 }
 
-/* Leia a seguir: outras apostilas, depois dos créditos */
+/* Leia a seguir: outras apostilas, logo depois da fita de chegada */
 .leia-seguir {
   scroll-margin-top: 90px;
-  padding: 2rem 0 3rem;
-  border-top: 1px solid var(--borda);
+  padding: 0 0 3rem;
 }
 
 .leia-seguir h2 {

@@ -200,7 +200,7 @@
   var alvosAnima = document.querySelectorAll(
     '.topico, .bloco-grid, .par-imagens, .trio-imagens, ' +
     '.figura-largura-plena, .caixa, .dado, .citacao, ' +
-    '.capitulo-abertura-hero, .capitulo-abertura-lado'
+    '.capitulo-abertura-hero, .capitulo-abertura-lado, .fita-fim'
   );
   alvosAnima.forEach(function (el) { el.classList.add('anima'); });
 
@@ -228,7 +228,7 @@
   // Guarda só o ponto mais avançado: reabrir a apostila do começo não apaga nada
   var slugLeitura = (location.pathname.match(/estudos\/([^/]+)/) || [])[1];
   var corpoTexto = document.querySelector('.estudo-corpo');
-  var fimTexto = document.getElementById('fontes');
+  var fimTexto = document.querySelector('.fita-fim');
 
   if (slugLeitura && corpoTexto && fimTexto) {
     var CHAVE_LEITURA = 'kosmopolis-leitura';
