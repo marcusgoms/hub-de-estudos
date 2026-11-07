@@ -1325,10 +1325,18 @@ div.area-card { cursor: default; }
 }
 
 /* ================================================================
-   FICHA DA APOSTILA: janela com o resumo, aberta pelo banner
+   FICHA DA APOSTILA: janela com o resumo, aberta pelo banner.
+   Sempre escura, mesmo com o hub no tema claro.
 ================================================================ */
 
 .ficha {
+  --plat-card:        #262B33;
+  --plat-borda:       rgba(255,255,255,0.08);
+  --plat-texto:       #E8E6E3;
+  --plat-texto-muted: #9A9894;
+  --plat-acento:      #D4A053;
+  --plat-acento-hover:#E0B06A;
+  color-scheme: dark;
   width: min(760px, calc(100vw - 32px));
   max-height: min(88vh, 880px);
   padding: 0;
@@ -1351,6 +1359,7 @@ div.area-card { cursor: default; }
 html:has(.ficha[open]) { overflow: hidden; }
 
 .ficha-rolagem {
+  scrollbar-width: thin;
   max-height: min(88vh, 880px);
   overflow-y: auto;
 }
