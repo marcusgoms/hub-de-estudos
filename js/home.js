@@ -197,7 +197,7 @@
     var pos = copias;
     var andando = false;
     var reserva = null;
-    var travas = { mouse: false, foco: false };
+    var travas = { mouse: false, foco: false, ficha: false };
 
     function aplicar() {
       trilhoHero.style.setProperty('--i', pos);
@@ -235,7 +235,7 @@
     }
 
     function pausar() {
-      hero.classList.toggle('pausado', travas.mouse || travas.foco);
+      hero.classList.toggle('pausado', travas.mouse || travas.foco || travas.ficha);
     }
 
     trilhoHero.addEventListener('transitionend', function (e) {
@@ -258,6 +258,28 @@
     hero.addEventListener('focusin', function () { travas.foco = true; pausar(); });
     hero.addEventListener('focusout', function () { travas.foco = false; pausar(); });
 
+    // Delegado no banner porque os slides das pontas são cópias
+    hero.addEventListener('click', function (e) {
+      var botao = e.target.closest('[data-ficha]');
+      var ficha = botao && document.getElementById(botao.dataset.ficha);
+      if (!ficha) return;
+      e.preventDefault();
+      travas.ficha = true;
+      pausar();
+      ficha.showModal();
+    });
+
+    document.querySelectorAll('.ficha').forEach(function (ficha) {
+      ficha.querySelector('.ficha-fechar').addEventListener('click', function () { ficha.close(); });
+      ficha.addEventListener('click', function (e) {
+        if (e.target === ficha) ficha.close();
+      });
+      ficha.addEventListener('close', function () {
+        travas.ficha = false;
+        pausar();
+      });
+    });
+
     var toqueX = null;
     hero.addEventListener('touchstart', function (e) { toqueX = e.touches[0].clientX; }, { passive: true });
     hero.addEventListener('touchend', function (e) {
@@ -269,6 +291,7 @@
 
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (document.querySelector('.ficha[open]')) return;
       if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
       if (menuLateral && menuLateral.classList.contains('aberto')) return;
       if (hero.getBoundingClientRect().bottom <= 0) return;
