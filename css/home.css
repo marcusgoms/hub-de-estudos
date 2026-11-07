@@ -1487,3 +1487,31 @@ html:has(.ficha[open]) { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .ficha[open] { animation: none; }
 }
+
+/* Símbolo de informações no canto do card */
+.card-poster-thumb { position: relative; }
+
+.card-info {
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(12, 13, 18, 0.72);
+  color: #fff;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.card-info:hover,
+.card-info:focus-visible {
+  background: rgba(12, 13, 18, 0.92);
+  color: #D4A053;
+}

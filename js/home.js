@@ -97,6 +97,20 @@
       });
     }
   });
+  // --- Símbolo de informações nos cards: abre a ficha, e o resto do card abre a apostila ---
+  document.querySelectorAll('a.card-plat, a.card-poster').forEach(function (card) {
+    var slug = (card.getAttribute('href').match(/estudos\/([^/]+)\//) || [])[1];
+    var capa = card.querySelector('.card-plat-thumb, .card-poster-thumb');
+    if (!slug || !capa || !document.getElementById('ficha-' + slug)) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'card-info';
+    b.dataset.ficha = 'ficha-' + slug;
+    b.setAttribute('aria-label', 'Mais informações sobre ' + card.querySelector('.card-plat-titulo').textContent);
+    b.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>';
+    capa.appendChild(b);
+  });
+
   // --- Fileira de apostilas: gira para os dois lados, sem fim ---
   document.querySelectorAll('.fileira-horizontal, .fileira-vertical').forEach(function (wrap) {
     var trilho = wrap.querySelector('.carrossel-trilho');
@@ -107,6 +121,7 @@
       var c = card.cloneNode(true);
       c.setAttribute('aria-hidden', 'true');
       c.setAttribute('tabindex', '-1');
+      c.querySelectorAll('button').forEach(function (b) { b.tabIndex = -1; });
       return c;
     }
 
@@ -258,8 +273,8 @@
     hero.addEventListener('focusin', function () { travas.foco = true; pausar(); });
     hero.addEventListener('focusout', function () { travas.foco = false; pausar(); });
 
-    // Delegado no banner porque os slides das pontas são cópias
-    hero.addEventListener('click', function (e) {
+    // Delegado porque os slides das pontas e os cards das fileiras têm cópias
+    document.addEventListener('click', function (e) {
       var botao = e.target.closest('[data-ficha]');
       var ficha = botao && document.getElementById(botao.dataset.ficha);
       if (!ficha) return;
