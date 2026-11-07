@@ -136,7 +136,6 @@ a:hover {
   background: rgba(245, 239, 226, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--borda);
   transition: transform 300ms ease;
 }
 
@@ -156,7 +155,6 @@ a:hover {
 
 .topo--escuro {
   background: rgba(12, 13, 18, 0.95) !important;
-  border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
 .topo--escuro .topo-logo { color: #D4A053; }

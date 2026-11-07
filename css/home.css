@@ -64,7 +64,6 @@ body.plataforma {
 /* --- Nav da plataforma --- */
 .plataforma .topo {
   background: rgba(245, 239, 226, 0.92) !important;
-  border-bottom-color: var(--plat-borda);
 }
 
 @media (prefers-color-scheme: dark) {
