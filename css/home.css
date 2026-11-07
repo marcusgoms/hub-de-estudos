@@ -21,6 +21,7 @@ body.plataforma {
   --cat-mitologia:    #7B6FCC;
   --cat-colapso:      #3B7CC7;
   --cat-cultural:     #C44F77;
+  --cat-filosofia:    #94701C;
 
   background: var(--plat-fundo);
   color: var(--plat-texto);
@@ -368,6 +369,7 @@ body.plataforma {
 .badge--mitologia   { background: var(--cat-mitologia); }
 .badge--colapso     { background: var(--cat-colapso); }
 .badge--cultural    { background: var(--cat-cultural); }
+.badge--filosofia   { background: var(--cat-filosofia); }
 .badge--tipo        { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
 
 .hero-plat-titulo {
@@ -616,7 +618,7 @@ body.plataforma {
 }
 
 .card-plat-thumb--grad {
-  background: var(--grad);
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 10px, transparent 10px 20px), var(--grad);
 }
 
 .card-plat-cat {
@@ -654,6 +656,7 @@ body.plataforma {
   color: rgba(255,255,255,0.55);
   background: rgba(0,0,0,0.35);
   padding: 0.3rem 0.8rem;
+  white-space: nowrap;
   border-radius: 4px;
 }
 
@@ -695,7 +698,7 @@ body.plataforma {
 
 .areas-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
@@ -817,7 +820,7 @@ div.area-card { cursor: default; }
 @media (max-width: 1080px) {
   .hero-plat { min-height: 440px; }
   .hero-plat-titulo { font-size: 2rem; }
-  .areas-grid { grid-template-columns: repeat(3, 1fr); }
+  .areas-grid { grid-template-columns: repeat(2, 1fr); }
   .card-plat { flex: 0 0 200px; }
 }
 
@@ -1197,7 +1200,7 @@ div.area-card { cursor: default; }
 }
 
 /* ================================================================
-   APOSTILAS PUBLICADAS: horizontal na tela larga, cartaz vertical na estreita
+   FILEIRAS DO HUB: horizontal na tela larga, cartaz vertical na estreita
 ================================================================ */
 
 .fileira-vertical { display: none; }
@@ -1268,7 +1271,10 @@ div.area-card { cursor: default; }
 .fileira-vertical.giro .carrossel-trilho { scroll-padding-left: 0; }
 .fileira-vertical.giro .card-poster { scroll-snap-align: center; }
 
-.card-poster-thumb.card-plat-thumb--grad { position: relative; }
+.card-poster-thumb.card-plat-thumb--grad {
+  position: relative;
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 10px, transparent 10px 20px), var(--grad);
+}
 
 .fileira-seta {
   position: absolute;
