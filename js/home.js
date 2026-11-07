@@ -354,13 +354,11 @@
           var noTitulo = erroTotal(principais, i.tituloBusca, i.tituloPalavras, i.tituloPalavras) < Infinity;
           return { item: i, capitulo: capitulo, erro: erroTotal(principais, i.busca, i.palavras, i.fortes), nota: (noTitulo ? 4 : 0) + (i.href ? 2 : 0) + (capitulo ? 1 : 0) };
         }).filter(function (a) { return a.erro < Infinity; });
-
-        // Fica só com os mais parecidos, para não trazer coincidências
-        var menor = Math.min.apply(null, achados.map(function (a) { return a.erro; }));
-        achados = achados.filter(function (a) { return a.erro <= menor + 0.5; });
       }
 
-      achados.sort(function (a, b) { return b.nota - a.nota || (a.erro || 0) - (b.erro || 0); });
+      // O mais próximo fica em cima; empate de proximidade favorece título e apostila publicada
+      var faixa = function (a) { return Math.round((a.erro || 0) * 2); };
+      achados.sort(function (a, b) { return faixa(a) - faixa(b) || b.nota - a.nota || (a.erro || 0) - (b.erro || 0); });
 
       if (!achados.length) {
         buscaAviso.textContent = 'Nada encontrado para "' + consulta + '". Tente outro tema.';
