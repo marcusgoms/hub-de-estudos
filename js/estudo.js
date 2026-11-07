@@ -223,4 +223,39 @@
   } else {
     alvosAnima.forEach(function (el) { el.classList.add('visivel'); });
   }
+
+  // ----------------- Progresso de leitura -----------------
+  // Guarda só o ponto mais avançado: reabrir a apostila do começo não apaga nada
+  var slugLeitura = (location.pathname.match(/estudos\/([^/]+)/) || [])[1];
+  var corpoTexto = document.querySelector('.estudo-corpo');
+  var fimTexto = document.getElementById('fontes');
+
+  if (slugLeitura && corpoTexto && fimTexto) {
+    var CHAVE_LEITURA = 'kosmopolis-leitura';
+    var marcos = Array.from(document.querySelectorAll('.capitulo[id], .topico[id]'));
+
+    var guardarLeitura = function () {
+      var inicio = corpoTexto.getBoundingClientRect().top + window.scrollY;
+      var fim = fimTexto.getBoundingClientRect().top + window.scrollY;
+      var pct = Math.round((window.scrollY + window.innerHeight * 0.6 - inicio) / (fim - inicio) * 100);
+      pct = Math.min(100, pct);
+      if (pct < 3) return;
+      try {
+        var leitura = JSON.parse(localStorage.getItem(CHAVE_LEITURA)) || {};
+        if (leitura[slugLeitura] && leitura[slugLeitura].pct >= pct) return;
+        var ancora = marcos.filter(function (m) {
+          return m.getBoundingClientRect().top <= window.innerHeight * 0.35;
+        }).pop();
+        leitura[slugLeitura] = { pct: pct, ancora: ancora ? ancora.id : '', data: Date.now() };
+        localStorage.setItem(CHAVE_LEITURA, JSON.stringify(leitura));
+      } catch (e) {}
+    };
+
+    var esperaLeitura;
+    window.addEventListener('scroll', function () {
+      clearTimeout(esperaLeitura);
+      esperaLeitura = setTimeout(guardarLeitura, 400);
+    }, { passive: true });
+    window.addEventListener('pagehide', guardarLeitura);
+  }
 })();

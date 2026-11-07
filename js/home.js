@@ -111,6 +111,41 @@
     capa.appendChild(b);
   });
 
+  // --- Progresso de leitura: barra nos cards e fileira "Continuar lendo" ---
+  var leitura = {};
+  try { leitura = JSON.parse(localStorage.getItem('kosmopolis-leitura')) || {}; } catch (e) {}
+
+  document.querySelectorAll('a.card-plat, a.card-poster').forEach(function (card) {
+    var slug = (card.getAttribute('href').match(/estudos\/([^/]+)\//) || [])[1];
+    var capa = card.querySelector('.card-plat-thumb, .card-poster-thumb');
+    if (!leitura[slug] || !capa) return;
+    var barra = document.createElement('span');
+    barra.className = 'card-progresso';
+    barra.style.setProperty('--lido', leitura[slug].pct + '%');
+    capa.appendChild(barra);
+  });
+
+  var continuar = document.getElementById('continuar');
+  var emCurso = Object.keys(leitura).filter(function (slug) {
+    return leitura[slug].pct < 95;
+  }).sort(function (a, b) {
+    return leitura[b].data - leitura[a].data;
+  });
+
+  emCurso.forEach(function (slug) {
+    [['horizontal', 'card-plat'], ['vertical', 'card-poster']].forEach(function (forma) {
+      var origem = document.querySelector('.fileira-' + forma[0] + ' a.' + forma[1] + '[href="estudos/' + slug + '/index.html"]');
+      if (!origem) return;
+      var card = origem.cloneNode(true);
+      var minutos = parseInt((origem.textContent.match(/(\d+) min/) || [])[1], 10);
+      var falta = Math.max(1, Math.ceil(minutos * (100 - leitura[slug].pct) / 100));
+      card.setAttribute('href', origem.getAttribute('href') + (leitura[slug].ancora ? '#' + leitura[slug].ancora : ''));
+      card.querySelector('.card-plat-sub').textContent = leitura[slug].pct + '% lido · ' + (minutos ? 'faltam ' + falta + ' min' : '');
+      continuar.querySelector('.fileira-' + forma[0] + ' .carrossel-trilho').appendChild(card);
+      continuar.hidden = false;
+    });
+  });
+
   // --- Fileira de apostilas: gira para os dois lados, sem fim ---
   document.querySelectorAll('.fileira-horizontal, .fileira-vertical').forEach(function (wrap) {
     var trilho = wrap.querySelector('.carrossel-trilho');
