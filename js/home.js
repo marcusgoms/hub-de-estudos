@@ -159,6 +159,118 @@
     });
   }
 
+  // --- Busca: o índice sai dos cards e das fichas, então apostila nova entra sozinha ---
+  var buscaJanela = document.querySelector('.busca-janela');
+
+  if (buscaJanela) {
+    var buscaCampo = buscaJanela.querySelector('.busca-campo');
+    var buscaAviso = buscaJanela.querySelector('.busca-aviso');
+    var buscaLista = buscaJanela.querySelector('.busca-resultados');
+
+    var normalizar = function (s) {
+      return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    };
+
+    var indice = [];
+    var vistos = {};
+    document.querySelectorAll('section.carrossel:not(#continuar) .fileira-horizontal .carrossel-trilho > *').forEach(function (card) {
+      var titulo = card.querySelector('.card-plat-titulo').textContent;
+      if (vistos[titulo]) return;
+      vistos[titulo] = true;
+      var href = card.getAttribute('href');
+      var slug = href ? href.split('/')[1] : '';
+      var ficha = document.getElementById('ficha-' + slug);
+      var img = card.querySelector('img');
+      var selo = card.querySelector('.badge');
+      var fileira = card.closest('section').querySelector('h2').textContent;
+      var tipo = card.querySelector('.card-plat-sub').textContent.split(' · ')[0];
+      var capitulos = ficha ? Array.from(ficha.querySelectorAll('.ficha-capitulos a')).map(function (a) {
+        return { nome: a.textContent, href: a.getAttribute('href'), busca: normalizar(a.textContent) };
+      }) : [];
+      indice.push({
+        titulo: titulo,
+        tipo: tipo,
+        fileira: fileira,
+        href: href,
+        capa: img ? img.getAttribute('src') : '',
+        capitulos: capitulos,
+        tituloBusca: normalizar(titulo),
+        busca: normalizar([titulo, tipo, fileira, selo ? selo.textContent : '', ficha ? ficha.querySelector('.ficha-resumo').textContent : ''].join(' ') + ' ' + capitulos.map(function (c) { return c.nome; }).join(' '))
+      });
+    });
+
+    var mostrarResultado = function (item, capitulo) {
+      var linha = document.createElement(item.href ? 'a' : 'div');
+      linha.className = 'busca-item' + (item.href ? '' : ' busca-item--breve');
+      if (item.href) linha.href = capitulo ? capitulo.href : item.href;
+      var capa = document.createElement('span');
+      capa.className = 'busca-capa';
+      if (item.capa) {
+        var img = document.createElement('img');
+        img.src = item.capa;
+        img.alt = '';
+        capa.appendChild(img);
+      }
+      var texto = document.createElement('span');
+      texto.className = 'busca-texto';
+      var titulo = document.createElement('span');
+      titulo.className = 'busca-titulo';
+      titulo.textContent = item.titulo;
+      var info = document.createElement('span');
+      info.className = 'busca-info';
+      info.textContent = item.href ? item.tipo + (capitulo ? ' · Capítulo: ' + capitulo.nome : '') : 'Em breve · ' + item.fileira;
+      texto.appendChild(titulo);
+      texto.appendChild(info);
+      linha.appendChild(capa);
+      linha.appendChild(texto);
+      buscaLista.appendChild(linha);
+    };
+
+    var buscar = function () {
+      var consulta = buscaCampo.value.trim();
+      var termos = normalizar(consulta).split(/\s+/).filter(Boolean);
+      buscaLista.textContent = '';
+
+      if (!termos.length) {
+        buscaAviso.textContent = 'Apostilas publicadas';
+        indice.filter(function (i) { return i.href; }).forEach(function (i) { mostrarResultado(i); });
+        return;
+      }
+
+      var achados = indice.filter(function (i) {
+        return termos.every(function (t) { return i.busca.indexOf(t) >= 0; });
+      }).map(function (i) {
+        var capitulo = i.capitulos.filter(function (c) {
+          return termos.every(function (t) { return c.busca.indexOf(t) >= 0; });
+        })[0];
+        var noTitulo = termos.every(function (t) { return i.tituloBusca.indexOf(t) >= 0; });
+        return { item: i, capitulo: capitulo, nota: (noTitulo ? 4 : 0) + (i.href ? 2 : 0) + (capitulo ? 1 : 0) };
+      }).sort(function (a, b) { return b.nota - a.nota; });
+
+      buscaAviso.textContent = achados.length
+        ? achados.length + (achados.length > 1 ? ' resultados' : ' resultado')
+        : 'Nada encontrado para "' + consulta + '". Tente outro tema.';
+      achados.slice(0, 12).forEach(function (a) { mostrarResultado(a.item, a.capitulo); });
+    };
+
+    document.querySelector('.busca-botao').addEventListener('click', function () {
+      buscaCampo.value = '';
+      buscar();
+      buscaJanela.showModal();
+      buscaCampo.focus();
+    });
+    buscaCampo.addEventListener('input', buscar);
+    buscaJanela.querySelector('.busca-fechar').addEventListener('click', function () { buscaJanela.close(); });
+    buscaJanela.addEventListener('click', function (e) {
+      if (e.target === buscaJanela) buscaJanela.close();
+    });
+    buscaJanela.querySelector('.busca-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var primeiro = buscaLista.querySelector('a.busca-item');
+      if (primeiro) primeiro.click();
+    });
+  }
+
   // --- Fileira de apostilas: gira para os dois lados, sem fim ---
   document.querySelectorAll('.fileira-horizontal, .fileira-vertical').forEach(function (wrap) {
     var trilho = wrap.querySelector('.carrossel-trilho');
@@ -354,7 +466,7 @@
 
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      if (document.querySelector('.ficha[open]')) return;
+      if (document.querySelector('dialog[open]')) return;
       if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
       if (menuLateral && menuLateral.classList.contains('aberto')) return;
       if (hero.getBoundingClientRect().bottom <= 0) return;

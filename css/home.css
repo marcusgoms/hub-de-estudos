@@ -1317,8 +1317,11 @@ div.area-card { cursor: default; }
   .giro .fileira-seta { display: flex; }
 }
 
-/* O menu de seis itens não cabe na barra abaixo de 1024 px */
-@media (max-width: 1023px) {
+/* O menu de seis itens não cabe na barra abaixo de 1100 px */
+.plataforma .topo-nav { gap: 1.5rem; }
+.plataforma .topo-nav a { white-space: nowrap; }
+
+@media (max-width: 1099px) {
   .plataforma .topo-nav,
   .plataforma .topo-divisor { display: none; }
   .menu-hamburguer { display: flex; }
@@ -1542,4 +1545,164 @@ html:has(.ficha[open]) { overflow: hidden; }
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* Busca: lupa na barra e janela, sempre escura como a ficha */
+.busca-botao {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--plat-borda);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--plat-texto-muted);
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.busca-botao:hover {
+  color: var(--plat-acento);
+  border-color: var(--plat-acento);
+}
+
+.busca-janela {
+  --plat-card:        #262B33;
+  --plat-card-hover:  #2E343D;
+  --plat-borda:       rgba(255,255,255,0.1);
+  --plat-texto:       #E8E6E3;
+  --plat-texto-muted: #9A9894;
+  --plat-acento:      #D4A053;
+  color-scheme: dark;
+  width: min(640px, calc(100vw - 32px));
+  max-height: min(76vh, 680px);
+  margin: 10vh auto auto;
+  padding: 0;
+  border: 1px solid var(--plat-borda);
+  border-radius: 14px;
+  background: var(--plat-card);
+  color: var(--plat-texto);
+  font-family: var(--fonte-sans);
+  overflow: hidden;
+}
+
+.busca-janela[open] { display: flex; flex-direction: column; }
+.busca-janela::backdrop { background: rgba(8, 10, 14, 0.72); }
+
+html:has(.busca-janela[open]) { overflow: hidden; }
+
+.busca-form {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.8rem 0.8rem 0.8rem 1.1rem;
+  border-bottom: 1px solid var(--plat-borda);
+  color: var(--plat-texto-muted);
+}
+
+.busca-form > svg { flex-shrink: 0; }
+
+.busca-campo {
+  flex: 1;
+  min-width: 0;
+  padding: 0.3rem 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--plat-texto);
+  font-family: var(--fonte-sans);
+  font-size: 1rem;
+}
+
+.busca-campo::placeholder { color: var(--plat-texto-muted); }
+.busca-campo::-webkit-search-cancel-button { display: none; }
+
+.busca-fechar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--plat-texto-muted);
+  cursor: pointer;
+}
+
+.busca-fechar:hover { color: var(--plat-texto); }
+
+.busca-aviso {
+  margin: 0;
+  padding: 0.8rem 1.1rem 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--plat-texto-muted);
+}
+
+.busca-resultados {
+  flex: 1;
+  min-height: 0;
+  padding: 0.3rem 0.5rem 0.7rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.busca-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  color: var(--plat-texto);
+  text-decoration: none;
+}
+
+a.busca-item:hover,
+a.busca-item:focus-visible { background: var(--plat-card-hover); }
+
+.busca-capa {
+  width: 84px;
+  aspect-ratio: 16 / 10;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 5px;
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 8px, transparent 8px 16px), #1A1E24;
+}
+
+.busca-capa img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.busca-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.busca-titulo {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.busca-info {
+  font-size: 0.76rem;
+  color: var(--plat-texto-muted);
+}
+
+.busca-item--breve .busca-titulo { color: var(--plat-texto-muted); }
+
+@media (max-width: 420px) {
+  .plataforma .topo-direita { gap: 0.5rem; }
+  .busca-capa { width: 64px; }
 }
