@@ -4,10 +4,10 @@
 
 /* --- Tokens da plataforma (claro = padrão) --- */
 body.plataforma {
-  --plat-fundo:       #E8E3D9;
-  --plat-fundo-2:     #DDD7CB;
-  --plat-card:        #F0ECE4;
-  --plat-card-hover:  #E8E3D9;
+  --plat-fundo:       #F5EFE2;
+  --plat-fundo-2:     #EBE4D4;
+  --plat-card:        #FBF7EE;
+  --plat-card-hover:  #F0E9DA;
   --plat-borda:       rgba(0,0,0,0.08);
   --plat-texto:       #1C1B18;
   --plat-texto-muted: #6B665E;
@@ -30,10 +30,10 @@ body.plataforma {
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) body.plataforma {
-    --plat-fundo:       #0C0D12;
-    --plat-fundo-2:     #111218;
-    --plat-card:        #181920;
-    --plat-card-hover:  #1F2029;
+    --plat-fundo:       #1A1E24;
+    --plat-fundo-2:     #20252C;
+    --plat-card:        #262B33;
+    --plat-card-hover:  #2E343D;
     --plat-borda:       rgba(255,255,255,0.06);
     --plat-texto:       #E8E6E3;
     --plat-texto-muted: #8A8885;
@@ -45,10 +45,10 @@ body.plataforma {
 }
 
 :root[data-theme="dark"] body.plataforma {
-  --plat-fundo:       #0C0D12;
-  --plat-fundo-2:     #111218;
-  --plat-card:        #181920;
-  --plat-card-hover:  #1F2029;
+  --plat-fundo:       #1A1E24;
+  --plat-fundo-2:     #20252C;
+  --plat-card:        #262B33;
+  --plat-card-hover:  #2E343D;
   --plat-borda:       rgba(255,255,255,0.06);
   --plat-texto:       #E8E6E3;
   --plat-texto-muted: #8A8885;
@@ -60,18 +60,18 @@ body.plataforma {
 
 /* --- Nav da plataforma --- */
 .plataforma .topo {
-  background: rgba(232, 227, 217, 0.92) !important;
+  background: rgba(245, 239, 226, 0.92) !important;
   border-bottom-color: var(--plat-borda);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .plataforma .topo {
-    background: rgba(12, 13, 18, 0.95) !important;
+    background: rgba(26, 30, 36, 0.95) !important;
   }
 }
 
 :root[data-theme="dark"] .plataforma .topo {
-  background: rgba(12, 13, 18, 0.95) !important;
+  background: rgba(26, 30, 36, 0.95) !important;
 }
 
 .plataforma .topo-logo { color: var(--plat-texto); }
