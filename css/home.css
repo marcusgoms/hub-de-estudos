@@ -21,7 +21,6 @@ body.plataforma {
   --cat-mitologia:    #7B6FCC;
   --cat-colapso:      #3B7CC7;
   --cat-cultural:     #C44F77;
-  --cat-filosofia:    #94701C;
 
   background: var(--plat-fundo);
   color: var(--plat-texto);
@@ -369,7 +368,6 @@ body.plataforma {
 .badge--mitologia   { background: var(--cat-mitologia); }
 .badge--colapso     { background: var(--cat-colapso); }
 .badge--cultural    { background: var(--cat-cultural); }
-.badge--filosofia   { background: var(--cat-filosofia); }
 .badge--tipo        { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
 
 .hero-plat-titulo {
@@ -1257,7 +1255,7 @@ div.area-card { cursor: default; }
 /* Fileira sem fim: quatro cards no meio, um vizinho aparecendo de cada lado.
    A classe .giro vem do home.js; sem JavaScript a fileira fica alinhada à esquerda. */
 
-.carrossel-trilho-wrap.giro { container-type: inline-size; }
+.fileira-horizontal { container-type: inline-size; }
 
 .giro .carrossel-trilho {
   padding: 6px 0 0;

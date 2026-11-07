@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/estilo.css?v=5">
-<link rel="stylesheet" href="css/home.css?v=21">
+<link rel="stylesheet" href="css/home.css?v=22">
 </head>
 <body class="plataforma">
 
@@ -170,8 +170,8 @@
 <section class="carrossel" id="apostilas">
   <div class="carrossel-cabeca">
     <div class="carrossel-titulo-grupo">
-      <div class="carrossel-barra" style="background: var(--cat-arqueologia)"></div>
-      <h2 class="carrossel-titulo">Grandes civilizações</h2>
+      <div class="carrossel-barra" style="background: var(--plat-acento)"></div>
+      <h2 class="carrossel-titulo">Publicadas recentemente</h2>
     </div>
   </div>
   <div class="carrossel-trilho-wrap fileira-horizontal">
@@ -188,9 +188,78 @@
         <div class="card-plat-titulo">Sumérios: a civilização de barro</div>
         <div class="card-plat-sub">Apostila principal · 5 capítulos</div>
       </a>
+      <a href="estudos/baia-dos-jarros/index.html" class="card-plat">
+        <div class="card-plat-thumb">
+          <img src="estudos/baia-dos-jarros/imagens/capa_ilustracao.jpg" alt="Baía dos Jarros" loading="lazy">
+          <span class="badge badge--debunking card-plat-cat">Debunking</span>
+          <span class="card-plat-dur">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            25 min
+          </span>
+        </div>
+        <div class="card-plat-titulo">Baía dos Jarros: as ânforas da Guanabara</div>
+        <div class="card-plat-sub">Curiosidade · 5 capítulos</div>
+      </a>
+      <a href="estudos/potosi/index.html" class="card-plat">
+        <div class="card-plat-thumb">
+          <img src="estudos/potosi/imagens/capa_ilustracao_openai.jpg" alt="Potosí" loading="lazy">
+          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
+          <span class="card-plat-dur">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            35 min
+          </span>
+        </div>
+        <div class="card-plat-titulo">Potosí: a montanha que financiou o mundo</div>
+        <div class="card-plat-sub">Curiosidade · 5 capítulos</div>
+      </a>
+    </div>
+  </div>
+  <div class="carrossel-trilho-wrap fileira-vertical">
+    <div class="carrossel-trilho">
+      <a href="estudos/sumerios/index.html" class="card-poster">
+        <div class="card-poster-thumb"><img src="estudos/sumerios/imagens/capa_ilustracao.jpg" alt="" loading="lazy" style="--foco: 82% 50%"></div>
+        <span class="badge badge--arqueologia">Arqueologia</span>
+        <div class="card-plat-titulo">Sumérios: a civilização de barro</div>
+        <div class="card-plat-sub">Apostila principal · 30 min</div>
+      </a>
+      <a href="estudos/baia-dos-jarros/index.html" class="card-poster">
+        <div class="card-poster-thumb"><img src="estudos/baia-dos-jarros/imagens/capa_ilustracao.jpg" alt="" loading="lazy" style="--foco: 72% 50%"></div>
+        <span class="badge badge--debunking">Debunking</span>
+        <div class="card-plat-titulo">Baía dos Jarros: as ânforas da Guanabara</div>
+        <div class="card-plat-sub">Curiosidade · 25 min</div>
+      </a>
+      <a href="estudos/potosi/index.html" class="card-poster">
+        <div class="card-poster-thumb"><img src="estudos/potosi/imagens/capa_ilustracao_openai.jpg" alt="" loading="lazy" style="--foco: 72% 50%"></div>
+        <span class="badge badge--arqueologia">Arqueologia</span>
+        <div class="card-plat-titulo">Potosí: a montanha que financiou o mundo</div>
+        <div class="card-plat-sub">Curiosidade · 35 min</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="carrossel" id="civilizacoes">
+  <div class="carrossel-cabeca">
+    <div class="carrossel-titulo-grupo">
+      <div class="carrossel-barra" style="background: var(--cat-arqueologia)"></div>
+      <h2 class="carrossel-titulo">Grandes civilizações</h2>
+    </div>
+  </div>
+  <div class="carrossel-trilho-wrap fileira-horizontal">
+    <div class="carrossel-trilho">
+      <a href="estudos/sumerios/index.html" class="card-plat">
+        <div class="card-plat-thumb">
+          <img src="estudos/sumerios/imagens/capa_ilustracao.jpg" alt="Sumérios" loading="lazy">
+          <span class="card-plat-dur">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            30 min
+          </span>
+        </div>
+        <div class="card-plat-titulo">Sumérios: a civilização de barro</div>
+        <div class="card-plat-sub">Apostila principal · 5 capítulos</div>
+      </a>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A10, #5A3520, #3A2010)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Egito antigo</div>
@@ -198,7 +267,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A20, #5A3040, #3A1A28)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Vale do Indo</div>
@@ -206,7 +274,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2010, #5A4520, #3A2C10)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Caral</div>
@@ -214,7 +281,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A10, #5A3520, #3A2010)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">China antiga</div>
@@ -222,7 +288,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A20, #5A3040, #3A1A28)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Olmecas</div>
@@ -230,7 +295,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2010, #5A4520, #3A2C10)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Grécia antiga</div>
@@ -238,7 +302,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A10, #5A3520, #3A2010)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Roma antiga</div>
@@ -246,7 +309,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A20, #5A3040, #3A1A28)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Maias</div>
@@ -254,7 +316,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2010, #5A4520, #3A2C10)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Incas</div>
@@ -266,61 +327,51 @@
     <div class="carrossel-trilho">
       <a href="estudos/sumerios/index.html" class="card-poster">
         <div class="card-poster-thumb"><img src="estudos/sumerios/imagens/capa_ilustracao.jpg" alt="" loading="lazy" style="--foco: 82% 50%"></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Sumérios: a civilização de barro</div>
         <div class="card-plat-sub">Apostila principal · 30 min</div>
       </a>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A10, #5A3520, #3A2010)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Egito antigo</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A20, #5A3040, #3A1A28)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Vale do Indo</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2010, #5A4520, #3A2C10)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Caral</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A10, #5A3520, #3A2010)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">China antiga</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A20, #5A3040, #3A1A28)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Olmecas</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2010, #5A4520, #3A2C10)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Grécia antiga</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A10, #5A3520, #3A2010)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Roma antiga</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1A20, #5A3040, #3A1A28)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Maias</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2010, #5A4520, #3A2C10)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
         <div class="card-plat-titulo">Incas</div>
         <div class="card-plat-sub">Apostila principal</div>
       </div>
@@ -363,7 +414,7 @@
       </a>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A3040, #2A5070, #1A3545)">
-          <span class="badge badge--arqueologia card-plat-cat">Arqueologia</span>
+          <span class="badge badge--mitologia card-plat-cat">Mitologia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Gilgamesh</div>
@@ -443,7 +494,7 @@
       </a>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A3040, #2A5070, #1A3545)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--arqueologia">Arqueologia</span>
+        <span class="badge badge--mitologia">Mitologia</span>
         <div class="card-plat-titulo">Gilgamesh</div>
         <div class="card-plat-sub">Dentro de Sumérios</div>
       </div>
@@ -504,7 +555,6 @@
     <div class="carrossel-trilho">
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #201525, #4A2A58, #2A1538)">
-          <span class="badge badge--mitologia card-plat-cat">Religião</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">A religião da Suméria</div>
@@ -512,7 +562,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A1830, #3A3468, #221E40)">
-          <span class="badge badge--mitologia card-plat-cat">Religião</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Os deuses que sobreviveram à conquista</div>
@@ -520,7 +569,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1525, #5A2A50, #381530)">
-          <span class="badge badge--mitologia card-plat-cat">Religião</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Mitos do dilúvio</div>
@@ -528,7 +576,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #201525, #4A2A58, #2A1538)">
-          <span class="badge badge--mitologia card-plat-cat">Religião</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">A morte no Egito antigo</div>
@@ -536,7 +583,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A1830, #3A3468, #221E40)">
-          <span class="badge badge--mitologia card-plat-cat">Religião</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Os Vedas</div>
@@ -544,7 +590,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1525, #5A2A50, #381530)">
-          <span class="badge badge--mitologia card-plat-cat">Religião</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">As origens do monoteísmo</div>
@@ -552,7 +597,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #201525, #4A2A58, #2A1538)">
-          <span class="badge badge--mitologia card-plat-cat">Religião</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Os deuses dos Andes</div>
@@ -564,43 +608,36 @@
     <div class="carrossel-trilho">
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #201525, #4A2A58, #2A1538)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--mitologia">Religião</span>
         <div class="card-plat-titulo">A religião da Suméria</div>
         <div class="card-plat-sub">Dentro de Sumérios</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A1830, #3A3468, #221E40)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--mitologia">Religião</span>
         <div class="card-plat-titulo">Os deuses que sobreviveram à conquista</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1525, #5A2A50, #381530)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--mitologia">Religião</span>
         <div class="card-plat-titulo">Mitos do dilúvio</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #201525, #4A2A58, #2A1538)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--mitologia">Religião</span>
         <div class="card-plat-titulo">A morte no Egito antigo</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A1830, #3A3468, #221E40)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--mitologia">Religião</span>
         <div class="card-plat-titulo">Os Vedas</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1525, #5A2A50, #381530)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--mitologia">Religião</span>
         <div class="card-plat-titulo">As origens do monoteísmo</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #201525, #4A2A58, #2A1538)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--mitologia">Religião</span>
         <div class="card-plat-titulo">Os deuses dos Andes</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
@@ -611,7 +648,7 @@
 <section class="carrossel" id="filosofia">
   <div class="carrossel-cabeca">
     <div class="carrossel-titulo-grupo">
-      <div class="carrossel-barra" style="background: var(--cat-filosofia)"></div>
+      <div class="carrossel-barra" style="background: #94701C"></div>
       <h2 class="carrossel-titulo">Filosofia</h2>
     </div>
   </div>
@@ -619,7 +656,6 @@
     <div class="carrossel-trilho">
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2410, #5A5020, #3A3210)">
-          <span class="badge badge--filosofia card-plat-cat">Filosofia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">A Era Axial</div>
@@ -627,7 +663,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A2430, #2A4A60, #1A3040)">
-          <span class="badge badge--filosofia card-plat-cat">Filosofia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Os pré-socráticos</div>
@@ -635,7 +670,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1E14, #5A4228, #3A2A18)">
-          <span class="badge badge--filosofia card-plat-cat">Filosofia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Sócrates e Platão</div>
@@ -643,7 +677,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2410, #5A5020, #3A3210)">
-          <span class="badge badge--filosofia card-plat-cat">Filosofia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Diógenes e os cínicos</div>
@@ -651,7 +684,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A2430, #2A4A60, #1A3040)">
-          <span class="badge badge--filosofia card-plat-cat">Filosofia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Confúcio</div>
@@ -659,7 +691,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1E14, #5A4228, #3A2A18)">
-          <span class="badge badge--filosofia card-plat-cat">Filosofia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Buda</div>
@@ -667,7 +698,6 @@
       </div>
       <div class="card-plat card-plat--breve">
         <div class="card-plat-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2410, #5A5020, #3A3210)">
-          <span class="badge badge--filosofia card-plat-cat">Filosofia</span>
           <div class="card-plat-breve-tag">Em breve</div>
         </div>
         <div class="card-plat-titulo">Zoroastro</div>
@@ -679,43 +709,36 @@
     <div class="carrossel-trilho">
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2410, #5A5020, #3A3210)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--filosofia">Filosofia</span>
         <div class="card-plat-titulo">A Era Axial</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A2430, #2A4A60, #1A3040)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--filosofia">Filosofia</span>
         <div class="card-plat-titulo">Os pré-socráticos</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1E14, #5A4228, #3A2A18)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--filosofia">Filosofia</span>
         <div class="card-plat-titulo">Sócrates e Platão</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2410, #5A5020, #3A3210)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--filosofia">Filosofia</span>
         <div class="card-plat-titulo">Diógenes e os cínicos</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #1A2430, #2A4A60, #1A3040)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--filosofia">Filosofia</span>
         <div class="card-plat-titulo">Confúcio</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A1E14, #5A4228, #3A2A18)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--filosofia">Filosofia</span>
         <div class="card-plat-titulo">Buda</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
       <div class="card-poster card-plat--breve">
         <div class="card-poster-thumb card-plat-thumb--grad" style="--grad: linear-gradient(135deg, #2A2410, #5A5020, #3A3210)"><div class="card-plat-breve-tag">Em breve</div></div>
-        <span class="badge badge--filosofia">Filosofia</span>
         <div class="card-plat-titulo">Zoroastro</div>
         <div class="card-plat-sub">Apostila</div>
       </div>
@@ -744,7 +767,7 @@
     <h2 class="carrossel-titulo">Explorar por área</h2>
   </div>
   <div class="areas-grid">
-    <a class="area-card" href="#apostilas" style="--area-grad: linear-gradient(135deg, #2A1A10, #5A3520)">
+    <a class="area-card" href="#civilizacoes" style="--area-grad: linear-gradient(135deg, #2A1A10, #5A3520)">
       <div class="area-card-texto">
         <div class="area-card-nome">Grandes civilizações</div>
         <div class="area-card-qtd">1 publicada · 9 em breve</div>
@@ -780,7 +803,7 @@
     <div class="rodape-plat-links">
       <div class="rodape-plat-col">
         <div class="rodape-plat-col-titulo">Conteúdo</div>
-        <a href="#apostilas">Grandes civilizações</a>
+        <a href="#civilizacoes">Grandes civilizações</a>
         <a href="#curiosidades">Curiosidades</a>
         <a href="#areas">Áreas temáticas</a>
       </div>
