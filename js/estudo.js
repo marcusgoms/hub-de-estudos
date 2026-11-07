@@ -76,11 +76,17 @@
     });
   }
 
+  // Capítulo com um tópico só, ou nenhum, não tem o que abrir: o clique vai direto a ele
+  function capituloSimples(li) {
+    return li.querySelectorAll('.nav-topicos a').length <= 1;
+  }
+
   // Clicar no nome do capítulo na sidebar desktop: abre os tópicos
   document.querySelectorAll('.estudo-nav .nav-cap').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       var li = this.closest('li');
+      if (capituloSimples(li)) { irPara('#' + li.dataset.cap, e); return; }
       var parent = this.closest('.estudo-nav');
       var itensCap = Array.from(parent.querySelectorAll('.nav-capitulos > li'));
       var jaAberto = li.classList.contains('aberto');
@@ -155,6 +161,7 @@
       link.addEventListener('click', function (e) {
         e.preventDefault();
         var li = this.closest('li');
+        if (capituloSimples(li)) { fecharPainel(); irPara('#' + li.dataset.cap, e); return; }
         var itensCap = Array.from(painel.querySelectorAll('.nav-capitulos > li'));
         var jaAberto = li.classList.contains('aberto');
         itensCap.forEach(function (x) { x.classList.remove('aberto'); });

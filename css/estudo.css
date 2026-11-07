@@ -200,6 +200,13 @@
 .estudo-nav {
   position: sticky;
   top: 90px;
+  /* Capítulo com muitos tópicos não pode passar do fim da tela */
+  max-height: calc(100vh - 110px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-left: 0.8rem;
+  margin-left: -0.8rem;
   font-family: var(--fonte-sans);
   font-size: 0.85rem;
 }
@@ -265,7 +272,8 @@
 
 .nav-capitulos > li.ativo .nav-topicos,
 .nav-capitulos > li.aberto .nav-topicos {
-  max-height: 200px;
+  /* Folga para qualquer número de tópicos: um limite baixo escondia os últimos */
+  max-height: 60rem;
   opacity: 1;
 }
 
@@ -316,6 +324,13 @@
 .estudo-nav-apostilas {
   position: sticky;
   top: 90px;
+  /* Capítulo com muitos tópicos não pode passar do fim da tela */
+  max-height: calc(100vh - 110px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-left: 0.8rem;
+  margin-left: -0.8rem;
   font-family: var(--fonte-sans);
   font-size: 0.85rem;
 }
@@ -1427,5 +1442,68 @@
     right: 0.8rem;
     width: 44px;
     height: 44px;
+  }
+}
+
+/* Linha do tempo: marcos do tema, perto do fim da apostila */
+
+.marcos {
+  list-style: none;
+  margin: 0.4rem 0 1.5rem 0.3rem;
+  padding: 0 0 0 1.4rem;
+  border-left: 2px solid var(--cap-claro);
+}
+
+.marco {
+  position: relative;
+  padding: 0.55rem 0;
+}
+
+.marco::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.4rem - 6px);
+  top: 0.95rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cap-forte);
+}
+
+.marco-data {
+  display: block;
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  color: var(--cap-forte);
+}
+
+.marco-texto {
+  margin: 0;
+  font-family: var(--fonte-texto);
+  font-size: 0.97rem;
+  line-height: 1.55;
+  color: var(--cinza-escuro);
+}
+
+.marco-texto strong {
+  color: var(--preto);
+  font-weight: 600;
+}
+
+/* Citação ao lado de um parágrafo, dentro de .bloco-grid-2 */
+
+.bloco-grid > .citacao {
+  margin: 0;
+  padding: 1.5rem 1.6rem;
+  font-size: 1.15rem;
+  justify-content: center;
+}
+
+@media (max-width: 1280px) {
+  .bloco-grid > .citacao {
+    padding: 1.2rem 1.3rem;
+    font-size: 1.05rem;
   }
 }

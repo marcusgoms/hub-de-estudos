@@ -97,4 +97,61 @@
       });
     }
   });
+  // --- Banner em carrossel ---
+  var hero = document.querySelector('.hero-carrossel');
+
+  if (hero) {
+    var slides = Array.from(hero.querySelectorAll('.hero-slide'));
+    var bolinhas = Array.from(hero.querySelectorAll('.hero-bolinha'));
+    var atual = 0;
+    var relogio = null;
+    var travas = { mouse: false, foco: false };
+    var semAnimacao = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function mostrar(i) {
+      atual = (i + slides.length) % slides.length;
+      slides.forEach(function (s, n) {
+        s.classList.toggle('ativo', n === atual);
+        if (n === atual) s.removeAttribute('aria-hidden');
+        else s.setAttribute('aria-hidden', 'true');
+      });
+      bolinhas.forEach(function (b, n) {
+        b.classList.toggle('ativa', n === atual);
+        if (n === atual) b.setAttribute('aria-current', 'true');
+        else b.removeAttribute('aria-current');
+      });
+    }
+
+    function parar() {
+      clearInterval(relogio);
+      relogio = null;
+    }
+
+    function tocar() {
+      parar();
+      if (semAnimacao || travas.mouse || travas.foco || document.hidden) return;
+      relogio = setInterval(function () { mostrar(atual + 1); }, 7000);
+    }
+
+    bolinhas.forEach(function (b, n) {
+      b.addEventListener('click', function () { mostrar(n); tocar(); });
+    });
+
+    hero.addEventListener('mouseenter', function () { travas.mouse = true; parar(); });
+    hero.addEventListener('mouseleave', function () { travas.mouse = false; tocar(); });
+    hero.addEventListener('focusin', function () { travas.foco = true; parar(); });
+    hero.addEventListener('focusout', function () { travas.foco = false; tocar(); });
+    document.addEventListener('visibilitychange', tocar);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+      if (menuLateral && menuLateral.classList.contains('aberto')) return;
+      if (hero.getBoundingClientRect().bottom <= 0) return;
+      mostrar(atual + (e.key === 'ArrowRight' ? 1 : -1));
+      tocar();
+    });
+
+    tocar();
+  }
 })();
